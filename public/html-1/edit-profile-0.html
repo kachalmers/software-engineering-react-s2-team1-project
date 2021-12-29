@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Edit Profile</h2>
+<form action="profile.html">
+    <label for="username">Username</label>
+    <input id="username" title="Username" readonly
+           placeholder="alan" value="alan"/><br/>
+    <label for="first-name">First name</label>
+    <input id="first-name" placeholder="Alan"/><br/>
+    <label for="last-name">Last name</label>
+    <input id="last-name" placeholder="Turin"/><br/>
+    <label for="bio">Bio</label>
+    <textarea id="bio"></textarea><br/>
+    <label for="date-of-birth">Date of birth</label>
+    <input id="date-of-birth"
+           type="date" value="2003-01-02"/><br/>
+    <label for="email">Email</label>
+    <input id="email" placeholder="alan@cam.ac.uk"
+           type="email"/><br/>
+    <label for="password">Reset password</label>
+    <input id="password" type="password"/><br/>
+    <label for="photo">Profile photo</label>
+    <input id="photo" type="file"/><br/>
+    <label for="header">Header image</label>
+    <input id="header" type="file"/><br/>
+    <label for="account">Select account</label>
+    <select id="account">
+        <option>Personal account</option>
+        <option selected>Academic account</option>
+    </select><br/>
+    Marital status
+    <input id="married" type="radio" name="marital"/>
+    <label for="married">Married</label>
+    <input id="single" type="radio"
+           checked name="marital"/>
+    <label for="single">Single</label><br/>
+    Topics of interest
+    <input id="topic-space" type="checkbox"
+           checked name="topics"/>
+    <label for="space">Space</label>
+    <input id="energy" type="checkbox" checked
+           name="topics"/>
+    <label for="energy">Energy</label>
+    <input id="politics" type="checkbox"
+           name="topics"/>
+    <label for="politics">Politics</label><br/>
+    <button>Save</button>   <button>Cancel</button>
+</form>
+</body>
+</html>
