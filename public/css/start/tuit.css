@@ -1,0 +1,53 @@
+.ttr-tuit {
+    border: 1px solid #EEEEEE;
+    display: flex;
+    max-width: 550px;
+    font-size: 18px;
+    font: 14px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif
+}
+
+.ttr-bold {
+    font-weight: bolder;
+}
+
+.ttr-padding-5px {
+    padding: 5px;
+}
+
+.ttr-padding-15px {
+    padding: 15px;
+}
+
+.ttr-column.ttr-left {
+    width: 60px;
+    flex: 0 0 60px;
+}
+.ttr-column.ttr-right {
+    width: 490px;
+    flex: 0 0 490px;
+}
+.ttr-verified {
+    width: 18px;
+    position: relative;
+    top: 3px;
+}
+
+.ttr-blue-column {
+    background-color: blue;
+    height: 100px;
+}
+
+.ttr-green-column {
+    background-color: green;
+    height: 100px;
+}
+
+
+/*.ttr-tuit .ttr-left {*/
+/*    width: 48px;*/
+/*    margin-right: 12px;*/
+/*}*/
+
+.ttr-tuit .ttr-tuit-avatar-logo {
+    width: 48px;
+}
