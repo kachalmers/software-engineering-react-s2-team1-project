@@ -1,0 +1,56 @@
+/**
+ * > 1300
+ * 275 / 598-600 / 350
+ */
+
+
+/**
+ * > 1100 & <1300
+ * 88 / 598-600 / 350
+ */
+
+/**
+ * > 1000 & < 1100
+ * 88 / 598-600 / 290
+ */
+
+/**
+ * < 1000
+ * 88 / 598-600
+ */
+
+
+/** xs */
+@media only screen and (max-width: 576px) {
+    .ttr-hidden-xs {
+        display: none;
+    }
+}
+
+/** sm */
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+    .ttr-hidden-sm {
+        display: none;
+    }
+}
+
+/** md */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .ttr-hidden-md {
+        display: none;
+    }
+}
+
+/** lg */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .ttr-hidden-lg {
+        display: none;
+    }
+}
+
+/** xl */
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    .ttr-hidden-xl {
+        display: none;
+    }
+}

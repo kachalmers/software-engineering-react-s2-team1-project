@@ -1,0 +1,151 @@
+.ttr-tuit {
+    border: 1px solid #EEEEEE;
+    border-top: none;
+    display: flex;
+    max-width: 550px;
+    min-height: 100px;
+    width: 100%;
+    font-size: 18px;
+    font: 14px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif
+}
+.ttr-user-logo {
+    border-radius: 10px;
+}
+.ttr-tuit:hover {
+    background-color: #EEEEEE;
+}
+.ttr-tuit:first-child {
+    border-top: 1px solid #EEEEEE;
+}
+
+.ttr-bold {
+    font-weight: bolder;
+}
+
+.ttr-padding-5px {
+    padding: 5px;
+}
+
+.ttr-padding-right-15px {
+    padding-right: 15px;
+}
+.ttr-padding-right-10px {
+    padding-right: 10px;
+}
+.ttr-padding-left-5px {
+    padding-left: 5px;
+}
+
+.ttr-margin-top-15px {
+    margin-top: 15px;
+}
+
+.ttr-margin-bottom-10px {
+    margin-bottom: 10px;
+}
+
+.ttr-margin-top-10px {
+    margin-top: 10px;
+}
+
+.ttr-padding-15px {
+    padding: 15px;
+}
+
+.ttr-padding-10px {
+    padding: 10px;
+}
+
+.ttr-padding-bottom-15px {
+    padding-bottom: 15px;
+}
+
+.ttr-column.ttr-left {
+    width: 60px;
+    /*flex: 0 0 60px;*/
+}
+.ttr-column.ttr-right {
+    max-width: 490px;
+    width: 100%;
+    /*flex: 0 1 490px;*/
+}
+.ttr-verified {
+    width: 18px;
+    position: relative;
+    top: 3px;
+}
+
+.ttr-embedded-tuit-image {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.ttr-tuit .ttr-tuit-avatar-logo {
+    width: 48px;
+}
+
+.ttr-color-black {
+    color: black;
+}
+
+.ttr-no-decoration {
+    text-decoration: none;
+}
+
+.ttr-color-lightgray {
+    color: lightgray;
+}
+
+.ttr-color-darkgray {
+    color: #808080;
+}
+
+.ttr-no-horizontal-scroll {
+    overflow-x: hidden;
+}
+
+.ttr-overflow-y-scroll {
+    overflow-x: scroll;
+}
+
+.ttr-overflow-x-auto {
+    overflow-x: auto;
+}
+
+.ttr-overflow-x-hidden {
+    overflow-x: hidden;
+}
+
+.ttr-responsive-video {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.ttr-responsive-video::after {
+    display: block;
+    content: "";
+    padding-top: 56.25%;
+}
+
+.ttr-responsive-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ttr-overlay {
+    position: absolute;
+    bottom: 10px;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    left: 10px;
+}
+
+.ttr-image-wrapper {
+    position: relative;
+}
