@@ -1,0 +1,47 @@
+body {
+    font: 14px Arial;
+}
+
+.ttr-navigation {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    color: black;
+}
+
+.ttr-navigation > li {
+    padding: 5px;
+    margin-bottom: 15px;
+    white-space: nowrap;
+    font-size: 1.6em;
+    text-align: left;
+    cursor: pointer;
+}
+
+.ttr-navigation .ttr-active {
+    font-weight: bold;
+}
+
+.ttr-navigation > li > a {
+    color: black;
+    text-decoration: none;
+}
+.ttr-navigation > li > a > i {
+    width: 40px;
+    text-align: center;
+}
+
+.ttr-navigation > li.ttr-button {
+    height: 40px;
+    background-color: rgb(29, 155, 240);
+    font-weight: bold;
+    text-align: center !important;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 25px;
+}
+.ttr-navigation > li.ttr-button > a {
+    color: white;
+    position: relative;
+    top: 5px;
+}

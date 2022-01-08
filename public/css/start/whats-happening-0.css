@@ -1,0 +1,75 @@
+body {
+    font-size: 18px;/*ok*/
+    font: 14px BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif/*ok*/
+}
+.ttr-whats-happening {
+    max-width: 348px;/*ok*/
+    color: black;/*ok*/
+}
+
+.ttr-whats-happening h2 {
+    margin-top: 0px;/*ok*/
+
+    font-size: 20px;/*ok*/
+    font-weight: bold;/*ok*/
+}
+.ttr-whats-happening h3 {
+    margin-top: 0px;/*ok*/
+
+    font-size: 10px;/*ok*/
+    font-weight: 400;/*ok*/
+    color: gray;/*ok*/
+}
+.ttr-whats-happening .ttr-whats-happening-tuits {
+    background-color: #EEEEEE;/*ok*/
+
+    margin-top: 10px;/*ok*/
+    padding: 10px;/*ok*/
+
+    border-radius: 15px;/*ok*/
+}
+.ttr-whats-happening .ttr-tuit-body {
+    margin-bottom: 10px;/*ok*/
+
+    font-weight: bold;/*ok*/
+}
+.ttr-whats-happening-tuit {
+    display: flex;/*ok*/
+
+    margin-bottom: 20px;/*ok*/
+}
+.ttr-column-right {
+    width: 70px;/*ok*/
+
+    padding-left: 10px;/*ok*/
+}
+.ttr-whats-happening-tuit .ttr-user-logo {
+    width: 68px;/* ok */
+
+    float: right;
+
+    border-radius: 15px;
+}
+
+
+
+
+
+.ttr-whats-happening .ttr-search .fas.fa-search {
+    position: absolute;
+    top: 15px;
+    left: 17px;
+}
+.ttr-whats-happening .ttr-search {
+    position: relative;
+    padding-right: 40px;
+}
+.ttr-whats-happening .ttr-search input {
+    padding-left: 40px;
+
+    width: 100%;
+    border-radius: 20px;
+    background-color: #EEEEEE;
+    border: none;
+    height: 40px;
+}

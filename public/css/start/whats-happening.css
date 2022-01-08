@@ -1,0 +1,65 @@
+body {
+    font: 14px Arial,sans-serif;
+}
+.ttr-whats-happening {
+    max-width: 348px;
+    color: black;
+}
+.ttr-whats-happening h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0px;
+}
+.ttr-whats-happening h3,
+.ttr-whats-happening h4 {
+    font-size: 10px;
+    font-weight: 400;
+    color: gray;
+    margin-top: 0px;
+}
+.ttr-whats-happening h4 {
+    margin-top: 10px;
+}
+.ttr-whats-happening .ttr-tuit-body {
+    font-weight: bold;
+}
+.ttr-whats-happening-tuit {
+    display: flex;
+    margin-bottom: 20px;
+}
+.ttr-whats-happening-tuit
+.ttr-column-right {
+    width: 70px;
+    padding-left: 10px;
+}
+.ttr-whats-happening-tuit
+.ttr-user-logo {
+    width: 68px;
+    border-radius: 15px;
+}
+.ttr-whats-happening
+.ttr-gray-background {
+    background-color: #EEEEEE;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.ttr-whats-happening .ttr-search .fas.fa-search {
+    position: absolute;
+    top: 15px;
+    left: 17px;
+}
+.ttr-whats-happening .ttr-search {
+    position: relative;
+    padding-right: 40px;
+}
+.ttr-whats-happening .ttr-search input {
+    padding-left: 40px;
+
+    width: 100%;
+    border-radius: 20px;
+    background-color: #EEEEEE;
+    border: none;
+    height: 40px;
+}

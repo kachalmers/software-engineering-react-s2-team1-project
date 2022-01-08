@@ -1,54 +1,45 @@
-body {
-    overflow-x: hidden;
-    font-size: 18px;
-    font: 14px BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif
-}
-
-.ttr-tuit-avatar-logo {
+.ttr-tuits .ttr-tuit-avatar-logo {
     width: 48px;
 }
-.ttr-tuit {
-    max-width: 550px;
-    display: flex;
-    width: 100%;
-    padding: 10px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #AAAAAA;
-    border-top: none;
-}
-.ttr-tuit:first-child {
-    border-top: 1px solid #AAAAAA;
-}
-.ttr-column-left {
-    width: 60px;
-}
-.ttr-column-right {
-    max-width: 490px;
-    width: 100%;
-    padding-left: 10px;
-}
-.ttr-tuit-image {
+
+.ttr-tuits .ttr-tuit-image {
     width: 100%;
     margin-top: 10px;
 }
 
-/*.ttr-tuit-image-responsive {*/
-/*    width: 100%;*/
-/*    max-height: 200px;*/
-/*    margin-top: 10px;*/
-/*}*/
+.ttr-tuits .ttr-tuit {
+    max-width: 550px;
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #EEEEEE;
+    border-top: none;
+    overflow-x: hidden;
+}
+.ttr-tuits .ttr-tuit:first-child {
+    border-top: 1px solid
+    #EEEEEE;
+}
 
-.ttr-tuit-heading {
-    font-weight: bold;
+.ttr-tuits .ttr-column-left {
+    width: 60px;
+}
+.ttr-tuits .ttr-column-right {
+    max-width: 490px;
+    width: 100%;
+    padding-left: 10px;
+}
+.ttr-tuits .ttr-tuit-heading {
     margin-bottom: 10px;
 }
 
-.ttr-tuit-image-wrapper {
+.ttr-tuits .ttr-tuit-image-wrapper {
     position: relative;
 }
 
-.ttr-tuit-image-overlay {
+.ttr-tuits .ttr-tuit-image-overlay {
     position: absolute;
     bottom: 20px;
     left: 20px;
@@ -56,16 +47,13 @@ body {
     color: white;
     font-weight: bolder;
 }
-
-.ttr-rounded-corner {
+.ttr-tuits .ttr-rounded-border {
     border-radius: 15px;
 }
-
-.ttr-circle-border {
+.ttr-tuits .ttr-circle-border {
     border-radius: 50%;
 }
-
-.ttr-responsive-video {
+.ttr-tuits .ttr-responsive-video {
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -73,13 +61,13 @@ body {
     margin-top: 10px;
 }
 
-.ttr-responsive-video::after {
+.ttr-tuits .ttr-responsive-video::after {
     display: block;
     content: "";
     padding-top: 56.25%;
 }
 
-.ttr-responsive-video iframe {
+.ttr-tuits .ttr-responsive-video iframe {
     position: absolute;
     top: 0;
     left: 0;
@@ -87,12 +75,12 @@ body {
     height: 100%;
 }
 
-.ttr-tuit-table {
+.ttr-tuits .ttr-tuit-table {
     overflow-x: auto;
 }
 
-.ttr-overflow-auto {
+.ttr-tuits .ttr-overflow-auto {
     margin-top: 10px;
-    max-height: 200px;
+    max-height: 300px;
     overflow: auto;
 }
