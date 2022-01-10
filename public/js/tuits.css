@@ -1,0 +1,13 @@
+.ttr-tuits .ttr-tuit-avatar-logo {
+    width: 48px;
+}
+
+.ttr-tuits .ttr-tuit-image-overlay {
+    left: 10px;
+}
+
+.ttr-tuits .ttr-responsive-video::after {
+    display: block;
+    content: "";
+    padding-top: 56.25%;
+}
