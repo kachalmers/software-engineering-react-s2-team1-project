@@ -34,8 +34,8 @@ body {
 }
 .ttr-whats-happening-tuit
 .ttr-user-logo {
-    width: 68px;
-    border-radius: 15px;
+    width: 68px; /* ok */
+    border-radius: 15px; /* ok */
 }
 .ttr-whats-happening
 .ttr-gray-background {
@@ -51,15 +51,15 @@ body {
     left: 17px;
 }
 .ttr-whats-happening .ttr-search {
-    position: relative;
+    position: relative; /* ok */
     padding-right: 40px;
 }
 .ttr-whats-happening .ttr-search input {
-    padding-left: 40px;
+    padding-left: 40px; /* ok */
 
-    width: 100%;
-    border-radius: 20px;
-    background-color: #EEEEEE;
-    border: none;
-    height: 40px;
+    width: 100%; /* ok */
+    border-radius: 20px; /* ok */
+    background-color: #EEEEEE; /* ok */
+    border: none; /* ok */
+    height: 40px; /* ok */
 }

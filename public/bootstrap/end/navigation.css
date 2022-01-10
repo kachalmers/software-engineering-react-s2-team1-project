@@ -1,0 +1,11 @@
+.ttr-navigation a > i {
+    width: 40px;
+    text-align: center;
+}
+
+.ttr-navigation li,
+.ttr-navigation a {
+    border: none;
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,23 @@
+body {
+    overflow-x: hidden;
+}
+
+.ttr-width-100-pc {
+    width: 100%;
+}
+
+.ttr-height-100-pc {
+    height: 100%;
+}
+
+.ttr-height-50-pc {
+    height: 50%;
+}
+
+.ttr-rounded-15px {
+    border-radius: 15px;
+}
+
+.ttr-font-size-150pc {
+    font-size: 1.5em;
+}
