@@ -36,7 +36,7 @@ const data = [
     "image": null,
     "youtube": "https://www.youtube.com/embed/TeVbYCIFVa8",
     "avatar-logo": "spacex.jpg",
-    "published": null,
+    "published": "Dec 25, 2021",
     "image-overlay": null,
     "stats": {
       "replies": 123,
