@@ -1,3 +1,5 @@
+import './navigation.css';
+
 function Navigation() {
   const links = [
     {label: 'Tuiter', icon: 'fa-square-t', href: 'tuiter.html'},

@@ -65,6 +65,7 @@ function Tuits() {
      `);
    }).join('')
  }
+ </ul>
     `);
 }
 export default Tuits;

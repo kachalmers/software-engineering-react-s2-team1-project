@@ -1,0 +1,46 @@
+body {
+    overflow-x: hidden;
+}
+
+.ttr-width-100-pc {
+    width: 100%;
+}
+
+.ttr-height-100-pc {
+    height: 100%;
+}
+
+.ttr-height-50-pc {
+    height: 50%;
+}
+
+.ttr-rounded-15px {
+    border-radius: 15px;
+}
+
+.ttr-font-size-150pc {
+    font-size: 1.5em;
+}
+
+.ttr-width-50px {
+    width: 50px;
+}
+.ttr-width-150px {
+    width: 150px;
+}
+
+.left-0 {
+    left: 0px;
+}
+
+.ttr-top-75px {
+    top: 75px;
+}
+
+.ttr-top-40px {
+    top: 40px;
+}
+
+.ttr-z-index-1 {
+    z-index: 1;
+}
