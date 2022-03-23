@@ -1,10 +1,30 @@
+import React from "react";
 import Tuits from "../tuits";
-// import "../tuits/tuits.css"
+import * as service from "../../services/tuits-service";
+import {useEffect, useState} from "react";
+import {useLocation, useParams} from "react-router-dom";
+
 const Home = () => {
+  const location = useLocation();
+  const {uid} = useParams();
+  const [tuits, setTuits] = useState([]);
+  const [tuit, setTuit] = useState('');
+  const userId = uid;
+  const findTuits = () =>
+      service.findAllTuits()
+        .then(tuits => setTuits(tuits));
+  useEffect(() => {
+    let isMounted = true;
+    findTuits()
+    return () => {isMounted = false;}
+  }, []);
+  const createTuit = () =>
+      service.createTuit('my', {tuit})
+          .then(findTuits)
   return(
     <div className="ttr-home">
       <div className="border border-bottom-0">
-        <h4 className="fw-bold p-2">Home</h4>
+        <h4 className="fw-bold p-2">Home Screen</h4>
         <div className="d-flex">
           <div className="p-2">
             <img className="ttr-width-50px rounded-circle"
@@ -12,6 +32,8 @@ const Home = () => {
           </div>
           <div className="p-2 w-100">
             <textarea
+                onChange={(e) =>
+                    setTuit(e.target.value)}
               placeholder="What's happening?"
               className="w-100 border-0"></textarea>
             <div className="row">
@@ -24,7 +46,9 @@ const Home = () => {
                 <i className="far fa-map-location me-3"></i>
               </div>
               <div className="col-2">
-                <a className="btn btn-primary rounded-pill fa-pull-right fw-bold ps-4 pe-4">
+                <a onClick={createTuit}
+                   className={`btn btn-primary rounded-pill fa-pull-right
+                                fw-bold ps-4 pe-4`}>
                   Tuit
                 </a>
               </div>
@@ -32,7 +56,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Tuits/>
+      <Tuits tuits={tuits}
+             refreshTuits={findTuits}/>
     </div>
   );
 };
