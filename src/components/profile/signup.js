@@ -7,8 +7,8 @@ const Signup = () => {
     const navigate = useNavigate();
     const signup = () =>
         service.register(newUser)
-            .then(() => navigate('/home'))
-            .catch(e => alert(e));
+            .then(() => navigate('/home'))  // nav to home if response succeeds
+            .catch(e => alert(e));  // Alert if response not successful
     return (
         <div>
             <h1>Signup</h1>

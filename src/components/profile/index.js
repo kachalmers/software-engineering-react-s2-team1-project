@@ -11,10 +11,12 @@ const Profile = () => {
   const [profile, setProfile] = useState({});
   useEffect(async () => {
     try {
+      // Use the profile client service to retrieve the currently logged in
+      // user to set a local profile state variable
       const user = await service.profile();
       setProfile(user);
-    } catch (e) {
-      navigate('/login');
+    } catch (e) { // If there's no one logged in
+      navigate('/login'); // navigate back to login screen
     }
   }, []);
   const logout = () => {

@@ -6,10 +6,12 @@ import * as service from "../../services/security-service";
 export const Login = () => {
     const [loginUser, setLoginUser] = useState({});
     const navigate = useNavigate()
+
+    // Handle Login button's click event
     const login = () =>
-        service.login(loginUser)
-            .then((user) => navigate('/profile/mytuits'))
-            .catch(e => alert(e));
+        service.login(loginUser)    // POSTs loginUser to login middleware
+            .then((user) => navigate('/profile/mytuits'))   // Response successful; navigate to profile
+            .catch(e => alert(e));  // Response not successful; alert
     return (
         <div>
             <h1>Login</h1>
