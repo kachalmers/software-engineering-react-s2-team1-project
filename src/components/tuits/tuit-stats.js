@@ -17,12 +17,12 @@ const TuitStats = ({tuit, likeTuit = () => {}}) => {
               {
                   // If I've liked the tuit
                   tuit.stats && tuit.stats.likes > 0 &&
-                  likesService.userLikesTuit("me", tuit._id) &&
+                  //likesService.userLikesTuit("me", tuit._id) &&
                   <i className="fas fa-thumbs-up me-1" style={{color: 'blue'}}></i>
               }
               {
-                  //tuit.stats && tuit.stats.likes <= 0 &&
-                  tuit.stats && (!(likesService.userLikesTuit("me", tuit._id)) || tuit.stats.likes <= 0) &&
+                  tuit.stats && tuit.stats.likes <= 0 &&
+                  //tuit.stats && (!(likesService.userLikesTuit("me", tuit._id)) || tuit.stats.likes <= 0) &&
                   <i className="far fa-thumbs-up me-1"></i>
               }
             {tuit.stats && tuit.stats.likes}
