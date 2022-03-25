@@ -3,10 +3,11 @@ import './tuits.css';
 import Tuit from "./tuit";
 import * as likesService from "../../services/likes-service";
 import * as service from "../../services/tuits-service";
-const Tuits = ({tuits = [], refreshTuits}) => {
-    const likeTuit = (tuit) =>
-        likesService.userLikesTuit("me", tuit._id)
-            .then(refreshTuits)
+const Tuits = ({tuits = [], refreshTuits}) => { // render list of tuits
+    const likeTuit = (tuit) =>  // callback to toggle tuit's likes count
+        likesService
+            .userLikesTuit("me", tuit._id)  // send request to REST API
+            .then(refreshTuits) // on response refresh screen
             .catch(e => alert(e))
     const deleteTuit = (tid) =>
         service.deleteTuit(tid)

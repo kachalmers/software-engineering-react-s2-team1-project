@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
-import MyTuits from "./my-tuits";
+import MyTuits from "./my-tuits"; // import MyTuits to render in profile screen
 import {HashRouter, Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
 import * as service from "../../services/security-service"
 import TuitsAndReplies from "./tuits-and-replies";
 import Media from "./media";
 import MyLikes from "./my-likes";
+
 const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
