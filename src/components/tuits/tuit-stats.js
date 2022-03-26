@@ -15,8 +15,8 @@ const TuitStats = ({tuit, likeTuit = () => {}}) => {
         <div className="col">
           <span onClick={() => likeTuit(tuit)}>
               {
-                  // If I've liked the tuit
                   tuit.stats && tuit.stats.likes > 0 &&
+                  // tuit.userLikesTuit (bool)
                   //likesService.userLikesTuit("me", tuit._id) &&
                   <i className="fas fa-thumbs-up me-1" style={{color: 'blue'}}></i>
               }
