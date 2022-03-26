@@ -16,6 +16,11 @@ const Tuits = ({tuits = [], refreshTuits}) => {
             .then(refreshTuits)
             .catch(e => alert(e));
 
+    const userDislikesTuit = (tuit) =>
+        dislikesService.findUserDislikesTuit("me", tuit._id)
+            //.then(refreshTuits)
+            .catch(e => alert(e));
+
     const deleteTuit = (tid) =>
         service.deleteTuit(tid)
             .then(refreshTuits);
@@ -29,6 +34,7 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                         deleteTuit={deleteTuit}
                         likeTuit={likeTuit}
                         dislikeTuit={dislikeTuit}
+                        userDislikesTuit={userDislikesTuit}
                         tuit={tuit}/>)
             }
           </ul>

@@ -1,7 +1,23 @@
 import React from "react";
-import * as likesService from "../../services/likes-service";
+//import * as likesService from "../../services/likes-service";
+//import * as dislikesService from "../../services/dislikes-service";
+import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 
-const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
+const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, userDislikesTuit = () => {}}) => {
+   // const userDislikesTuitBool = (tuit) =>
+     //   dislikesService.userDislikesTuit("me", tuit._id);
+    //const userDislikesTuitJson = userDislikesTuit(tuit);
+
+    const [userDislikesTuitJson, setUserDislikesTuitJson] = useState({});
+    const [otherUserStateVariable, setOtherUserStateVariable] = useState({});
+
+    useEffect(() => {
+        setUserDislikesTuitJson(async () => await userDislikesTuit(tuit));
+        userDislikesTuitJson && userDislikesTuitJson.then(json => setOtherUserStateVariable(json));
+    }, [tuit, userDislikesTuit]); // <- add the count variable here
+
+
     return (
       <div className="row mt-2">
         <div className="col">
@@ -13,7 +29,7 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
           {tuit.stats && tuit.stats.retuits}
         </div>
         <div className="col">
-          <span onClick={() => likeTuit(tuit)}>
+            <span onClick={() => likeTuit(tuit)}>
               {
                   tuit.stats && tuit.stats.likes > 0 &&
                   // tuit.userLikesTuit (bool)
@@ -32,10 +48,15 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
           <span onClick={() => dislikeTuit(tuit)}>
               {
                   tuit.stats && tuit.stats.dislikes > 0 &&
+                  userDislikesTuitJson.length>0 &&
                   <i className="fas fa-thumbs-down me-1" style={{color: 'blue'}}></i>
               }
               {
-                  tuit.stats && tuit.stats.dislikes <= 0 &&
+                  //tuit.stats && tuit.stats.dislikes <= 0 &&
+                  //console.log(userDislikesTuitJson) &&
+                  //userDislikesTuitJson.then(json => console.log(json)) &&
+                  console.log(otherUserStateVariable) &&
+                  tuit.stats && (userDislikesTuitJson.length<=0 || tuit.stats.dislikes <= 0) &&
                   <i className="far fa-thumbs-down me-1"></i>
               }
               {tuit.stats && tuit.stats.dislikes}
@@ -47,4 +68,6 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
       </div>
     );
 }
+//ReactDOM.render(<TuitStats />, document.getElementById("root"));
+
 export default TuitStats;
