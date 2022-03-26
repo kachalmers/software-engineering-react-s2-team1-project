@@ -1,7 +1,7 @@
 import React from "react";
 import * as likesService from "../../services/likes-service";
 
-const TuitStats = ({tuit, likeTuit = () => {}}) => {
+const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
     return (
       <div className="row mt-2">
         <div className="col">
@@ -32,13 +32,10 @@ const TuitStats = ({tuit, likeTuit = () => {}}) => {
           <span onClick={() => dislikeTuit(tuit)}>
               {
                   tuit.stats && tuit.stats.dislikes > 0 &&
-                  // tuit.userLikesTuit (bool)
-                  //dislikesService.userLikesTuit("me", tuit._id) &&
                   <i className="fas fa-thumbs-down me-1" style={{color: 'blue'}}></i>
               }
               {
                   tuit.stats && tuit.stats.dislikes <= 0 &&
-                  //tuit.stats && (!(dislikesService.userLikesTuit("me", tuit._id)) || tuit.stats.dislikes <= 0) &&
                   <i className="far fa-thumbs-down me-1"></i>
               }
               {tuit.stats && tuit.stats.dislikes}
