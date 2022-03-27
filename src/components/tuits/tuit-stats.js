@@ -9,13 +9,16 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, userDisli
      //   dislikesService.userDislikesTuit("me", tuit._id);
     //const userDislikesTuitJson = userDislikesTuit(tuit);
 
-    //const [userDislikesTuitJson, setUserDislikesTuitJson] = useState({});
-    //const [otherUserStateVariable, setOtherUserStateVariable] = useState({});
+    const [userDislikesTuitJson, setUserDislikesTuitJson] = useState({});
+    const [otherUserStateVariable, setOtherUserStateVariable] = useState({});
 
-    //useEffect(() => {
-    //    setUserDislikesTuitJson(async () => await userDislikesTuit(tuit));
+    useEffect(() => {
+        setUserDislikesTuitJson(async () => await userDislikesTuit(tuit));
+        //setUserDislikesTuitJson(userDislikesTuit(tuit));
+
+
     //    userDislikesTuitJson && userDislikesTuitJson.then(json => setOtherUserStateVariable(json));
-    //}, [tuit, userDislikesTuit]); // <- add the count variable here
+    }, [tuit, userDislikesTuit]); // <- add the count variable here
 
 
     return (
@@ -48,15 +51,19 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, userDisli
           <span onClick={() => dislikeTuit(tuit)}>
               {
                   tuit.stats && tuit.stats.dislikes > 0 &&
-                  //userDislikesTuitJson.length>0 &&
+                  userDislikesTuitJson.tuit !== null &&
                   <i className="fas fa-thumbs-down me-1" style={{color: 'blue'}}></i>
               }
               {
-                  tuit.stats && tuit.stats.dislikes <= 0 &&
+                  //tuit.stats && tuit.stats.dislikes <= 0 &&
                   //console.log(userDislikesTuitJson) &&
                   //userDislikesTuitJson.then(json => console.log(json)) &&
                   //console.log(otherUserStateVariable) &&
-                  //tuit.stats && (userDislikesTuitJson.length<=0 || tuit.stats.dislikes <= 0) &&
+
+                  // If user doesn't dislike tuit yet or dislikes count <= 0
+                  tuit.stats && (userDislikesTuitJson === null || tuit.stats.dislikes <= 0) &&
+
+                  // Don't fill shape
                   <i className="far fa-thumbs-down me-1"></i>
               }
               {tuit.stats && tuit.stats.dislikes}
