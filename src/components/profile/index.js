@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from "react";
 import MyTuits from "./my-tuits"; // import MyTuits to render in profile screen
 import {HashRouter, Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
-import * as service from "../../services/security-service"
+import * as service from "../../services/security-service";
 import TuitsAndReplies from "./tuits-and-replies";
 import Media from "./media";
 import MyLikes from "./my-likes";
+<<<<<<< HEAD
 
+=======
+import MyDislikes from "./my-dislikes";
+>>>>>>> dislikes-button
 const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -87,18 +91,24 @@ const Profile = () => {
             </li>
             <li className="nav-item">
               <Link to="/profile/likes"
-                    className={`nav-link ${location.pathname.indexOf('likes') >= 0 ? 'active':''}`}>
+                    className={`nav-link ${location.pathname.indexOf('/likes') >= 0 ? 'active':''}`}>
                 Likes</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/profile/dislikes"
+                    className={`nav-link ${location.pathname.indexOf('dislikes') >= 0 ? 'active':''}`}>
+                Dislikes</Link>
             </li>
           </ul>
         </div>
       </div>
-        <Routes>
-          <Route path="/mytuits" element={<MyTuits/>}/>
-          <Route path="/tuits-and-replies" element={<TuitsAndReplies/>}/>
-          <Route path="/media" element={<Media/>}/>
-          <Route path="/likes" element={<MyLikes/>}/>
-        </Routes>
+      <Routes>
+        <Route path="/mytuits" element={<MyTuits/>}/>
+        <Route path="/tuits-and-replies" element={<TuitsAndReplies/>}/>
+        <Route path="/media" element={<Media/>}/>
+        <Route path="/likes" element={<MyLikes/>}/>
+        <Route path="/dislikes" element={<MyDislikes/>}/>
+      </Routes>
     </div>
   );
 }
