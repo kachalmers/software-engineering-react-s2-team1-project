@@ -19,8 +19,13 @@ const Home = () => {
     return () => {isMounted = false;}
   }, []);
   const createTuit = () =>
-      service.createTuit('my', {tuit})
+      service.createTuit('me', {tuit})
           .then(findTuits)
+          .catch(e=>{
+            alert("Error: Request failed with status code "
+                  + e.response.status + ". "
+                  + e.response.data);
+          });
   return(
     <div className="ttr-home">
       <div className="border border-bottom-0">
