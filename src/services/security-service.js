@@ -3,8 +3,8 @@
  */
 import axios from "axios";  // import library to provide access to authentication middleware
 // const BASE_URL = "https://cs5500-01-sp22.herokuapp.com";
-const BASE_URL = "http://localhost:4000";
-//const BASE_URL = process.env.REACT_APP_BASE_URL;
+//const BASE_URL = "http://localhost:4000";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const SECURITY_API = `${BASE_URL}/api/auth`;
 
