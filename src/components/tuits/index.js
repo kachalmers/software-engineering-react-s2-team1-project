@@ -18,7 +18,7 @@ const Tuits = ({tuits = [], refreshTuits}) => {
 
     // Find whether user dislikes a tuit by retrieving the dislike of the tuit
     // by the user if it exists
-    const userDislikesTuit = (tuit) =>
+    const findUserDislikesTuit = (tuit) =>
         dislikesService.findUserDislikesTuit("me", tuit._id)
             //.then(refreshTuits)
             .catch(e => alert(e));
@@ -36,7 +36,7 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                         deleteTuit={deleteTuit}
                         likeTuit={likeTuit}
                         dislikeTuit={dislikeTuit}
-                        userDislikesTuit={userDislikesTuit}
+                        findUserDislikesTuit={findUserDislikesTuit}
                         tuit={tuit}/>)
             }
           </ul>

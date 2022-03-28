@@ -4,7 +4,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
-const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, userDislikesTuit = () => {}}) => {
+const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, findUserDislikesTuit = () => {}}) => {
    // const userDislikesTuitBool = (tuit) =>
      //   dislikesService.userDislikesTuit("me", tuit._id);
     //const userDislikesTuitJson = userDislikesTuit(tuit);
