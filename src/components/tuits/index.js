@@ -13,16 +13,16 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                 alert(e);
             });
 
+    /**
+     * Use dislikes-service to create a dislike document in the database with
+     * the current user and a given tuit.
+     * @param tuit Tuit to be disliked
+     * @returns {Promise<T | void>} Promise to be notified when dislike is
+     * is created in the database
+     */
     const dislikeTuit = (tuit) =>
         dislikesService.userDislikesTuit("me", tuit._id)
             .then(refreshTuits)
-            .catch(e => alert(e));
-
-    // Find whether user dislikes a tuit by retrieving the dislike of the tuit
-    // by the user if it exists
-    const findUserDislikesTuit = (tuit) =>
-        dislikesService.findUserDislikesTuit("me", tuit._id)
-            //.then(refreshTuits)
             .catch(e => alert(e));
 
     const deleteTuit = (tid) =>
@@ -38,7 +38,6 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                         deleteTuit={deleteTuit}
                         likeTuit={likeTuit}
                         dislikeTuit={dislikeTuit}
-                        findUserDislikesTuit={findUserDislikesTuit}
                         tuit={tuit}/>)
             }
           </ul>

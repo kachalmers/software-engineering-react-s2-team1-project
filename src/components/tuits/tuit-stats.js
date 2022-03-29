@@ -3,7 +3,7 @@ import * as likesService from "../../services/likes-service";
 import * as dislikesService from "../../services/dislikes-service";
 import { useState, useEffect } from "react";
 
-const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, findUserDislikesTuit = () => {}}) => {
+const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
 
     const [userLikesTuitJson, setUserLikesTuitJson] = useState({});
     useEffect(() => {
@@ -11,12 +11,15 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, findUserD
             .then(value => setUserLikesTuitJson(value));
     }, [tuit]);
 
+    // Create use state for whether logged-in user dislikes tuits
     const [userDislikesTuitJson, setUserDislikesTuitJson] = useState({});
+
+    // Create use state for whether logged-in user dislikes tuits
     useEffect(() => {
+        // Find the dislike of a tuit by a user, if it exists
         dislikesService.findUserDislikesTuit("me", tuit._id)
+            // Then, set userDislikesTuitJson to retrieved dislike
             .then(value => setUserDislikesTuitJson(value));
-        console.log(JSON.stringify(userDislikesTuitJson));
-        console.log(JSON.stringify(userDislikesTuitJson) === '{}');
     }, [tuit]);
 
     return (
@@ -51,10 +54,12 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, findUserD
         <div className="col">
           <span onClick={() => dislikeTuit(tuit)}>
               {
+                  // If tuit has dislikes and logged-in user likes tuit...
                   tuit.stats && tuit.stats.dislikes > 0 &&
                   userDislikesTuitJson &&
                   (userDislikesTuitJson.tuit !== null) &&
                   (JSON.stringify(userDislikesTuitJson) !== '{}') &&
+                  // Show solid thumbs-down icon
                   <i className="fas fa-thumbs-down me-1" style={{color: 'blue'}}></i>
               }
               {
@@ -63,7 +68,7 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, findUserD
                                  || JSON.stringify(userDislikesTuitJson) === '{}'
                                  || tuit.stats.dislikes <= 0) &&
 
-                  // Don't fill shape
+                  // Show unfilled thumbs-down icon
                   <i className="far fa-thumbs-down me-1"></i>
               }
               {tuit.stats && tuit.stats.dislikes}
