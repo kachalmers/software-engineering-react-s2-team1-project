@@ -5,11 +5,8 @@ import * as service from "../../services/security-service";
 import TuitsAndReplies from "./tuits-and-replies";
 import Media from "./media";
 import MyLikes from "./my-likes";
-<<<<<<< HEAD
-
-=======
 import MyDislikes from "./my-dislikes";
->>>>>>> dislikes-button
+
 const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
