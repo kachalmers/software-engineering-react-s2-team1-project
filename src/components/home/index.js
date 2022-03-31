@@ -3,6 +3,7 @@ import Tuits from "../tuits";
 import * as service from "../../services/tuits-service";
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
+import * as authService from "../../services/security-service";
 
 const Home = () => {
   const location = useLocation();
@@ -13,11 +14,24 @@ const Home = () => {
   const findTuits = () =>
       service.findAllTuits()
         .then(tuits => setTuits(tuits));
+
+  const [profile, setProfile] = useState({});
+
   useEffect(() => {
     let isMounted = true;
-    findTuits()
+    try {
+      authService.profile()
+          .then((user) => {
+            if (user) {
+              setProfile(user);
+              findTuits();
+            }
+          });
+    } catch (e) {
+    }
     return () => {isMounted = false;}
   }, []);
+
   const createTuit = () =>
       service.createTuit('me', {tuit})
           .then(findTuits)
