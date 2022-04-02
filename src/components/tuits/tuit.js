@@ -1,11 +1,13 @@
+/**
+ * @file Implement Tuit component for displaying each tuit
+ */
 import React from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
-import {useNavigate, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
-const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
-    const navigate = useNavigate();
+const Tuit = ({tuit, deleteTuit, toggleLikes, toggleDislikes}) => {
     const daysOld = (tuit) => {
         const now = new Date();
         const nowMillis = now.getTime();
@@ -25,29 +27,41 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
             old = Math.round(minutesOld) + 'm';
         } else if(secondsOld > 1) {
             old = Math.round(secondsOld) + 's';
+        } else {
+            old = "just now"
         }
         return old;
     }
-    return(
-        // <li onClick={() => navigate(`/tuit/${tuit._id}`)}
+
+    return (
         <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
             <div className="pe-2">
                 {
                     tuit.postedBy &&
                     <img src={`../images/${tuit.postedBy.username}.jpg`}
-                         className="ttr-tuit-avatar-logo rounded-circle"/>
+                         onError={event => {
+                             event.target.src = "../images/default-image.jpg"
+                             event.onerror = null
+                         }}
+                        className="ttr-tuit-avatar-logo rounded-circle"
+                    />
                 }
             </div>
             <div className="w-100">
-                <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"></i>
+                { tuit.ownedByMe === true &&
+                    <i onClick={() => deleteTuit(tuit._id)}
+                       className="fas fa-remove tuit-button fa-2x fa-pull-right"
+                    ></i>
+                }
                 <Link to={`/tuit/${tuit._id}`}>
-                    <i className="float-end fas fa-circle-ellipsis me-1"></i>
+                    <i className="float-end tuit-button fas fa-circle-ellipsis me-1"></i>
                 </Link>
                 <h2
                     className="fs-5">
                     {tuit.postedBy && tuit.postedBy.username}
                     @{tuit.postedBy && tuit.postedBy.username} -
-                    <span className="ms-1">{daysOld(tuit)}</span></h2>
+                    <span className="ms-1">{daysOld(tuit)}</span>
+                </h2>
                 {tuit.tuit}
                 {
                     tuit.youtube &&
@@ -57,7 +71,10 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
                     tuit.image &&
                     <TuitImage tuit={tuit}/>
                 }
-                <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit}/>
+                <TuitStats tuit={tuit}
+                           toggleDislikes={toggleDislikes}
+                           toggleLikes={toggleLikes}
+                />
             </div>
         </li>
     );

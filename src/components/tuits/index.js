@@ -1,48 +1,79 @@
-import React from "react";
+/**
+ * @file Implements Tuits component to display a list of tuits
+ */
+import React, {useEffect, useState} from "react";
 import './tuits.css';
 import Tuit from "./tuit";
-import * as likesService from "../../services/likes-service";
-import * as dislikesService from "../../services/dislikes-service";
-import * as service from "../../services/tuits-service";
+import * as likeService from "../../services/likes-service";
+import * as dislikeService from "../../services/dislikes-service";
+import * as tuitService from '../../services/tuits-service';
+import * as authService from "../../services/auth-service";
 
 const Tuits = ({tuits = [], refreshTuits}) => {
-    const likeTuit = (tuit) =>
-        likesService.userLikesTuit("me", tuit._id)
-            .then(refreshTuits)
-            .catch(e => {
-                alert(e);
-            });
+    const [profile, setProfile] = useState(undefined);
+    useEffect(async ()=> {
+        try {
+            const user = await authService.profile();
+            if (user) {
+                setProfile(user);
+            }
+        } catch (e) {
+        }
+    }, []);
 
     /**
-     * Use dislikes-service to create a dislike document in the database with
-     * the current user and a given tuit.
-     * @param tuit Tuit to be disliked
-     * @returns {Promise<T | void>} Promise to be notified when dislike is
-     * is created in the database
+     * Toggle likes of a tuit using the API.
+     * @param tuit Tuit with likes to be toggled
      */
-    const dislikeTuit = (tuit) =>
-        dislikesService.userDislikesTuit("me", tuit._id)
-            .then(refreshTuits)
-            .catch(e => alert(e));
+    const toggleLikes = (tuit) => {
+        if (profile !== undefined) {
+            likeService.userTogglesTuitLikes("me", tuit._id)
+                .then(refreshTuits)
+                .catch(e => alert(e));
+        } else {
+            alert("Log in to like tuits!")
+        }
+    }
 
+    /**
+     * Toggle dislikes of a tuit using the API.
+     * @param tuit Tuit with dislikes to be toggled
+     */
+    const toggleDislikes = (tuit) => {
+        if (profile !== undefined) {
+            dislikeService.userTogglesTuitDislikes("me", tuit._id)
+                .then(refreshTuits)
+                .catch(e => alert(e));
+        } else {
+            alert("Log in to dislike tuits!")
+        }
+    }
+
+    /**
+     * Delete tuit using API.
+     * @param tid Primary key of tuit
+     */
     const deleteTuit = (tid) =>
-        service.deleteTuit(tid)
+        tuitService.deleteTuit(tid)
             .then(refreshTuits);
 
     return (
-        <div>
-            <ul className="ttr-tuits list-group">
-                {
-                    tuits.map && tuits.map(tuit =>
-                                               <Tuit key={tuit._id}
-                                                     deleteTuit={deleteTuit}
-                                                     likeTuit={likeTuit}
-                                                     dislikeTuit={dislikeTuit}
-                                                     tuit={tuit}/>)
-                }
-            </ul>
-        </div>
-    );
+    <div>
+      <ul className="ttr-tuits list-group">
+        {
+          tuits.map && tuits.map(tuit => {
+            return (
+              <Tuit key={tuit._id}
+                    deleteTuit={deleteTuit}
+                    toggleLikes={toggleLikes}
+                    toggleDislikes={toggleDislikes}
+                    tuit={tuit}/>
+            );
+          })
+        }
+      </ul>
+    </div>
+  );
 }
 
 export default Tuits;

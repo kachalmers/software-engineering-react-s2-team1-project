@@ -12,7 +12,7 @@ const TuitScreen = () => {
     useEffect(findTuitById, []);
     return(
         <div>
-            <Tuit tuit={tuit} likeTuit={() => {}} dislikeTuit={() => {}}/>
+            <Tuit tuit={tuit}/>
         </div>
     );
 };
