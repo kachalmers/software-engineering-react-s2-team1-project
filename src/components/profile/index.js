@@ -1,36 +1,44 @@
+/**
+ * @file Implements Profile component for displaying user profile page
+ */
 import React, {useEffect, useState} from "react";
 import MyTuits from "./my-tuits"; // import MyTuits to render in profile screen
-import {HashRouter, Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
-import * as service from "../../services/security-service";
-import TuitsAndReplies from "./tuits-and-replies";
-import Media from "./media";
+import {Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import * as service from "../../services/auth-service";
 import MyLikes from "./my-likes";
 import MyDislikes from "./my-dislikes";
+import TuitsAndReplies from "./tuits-and-replies";
+import Media from "./media";
 
 const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [profile, setProfile] = useState({});
+
   useEffect(async () => {
     try {
-      // Use the profile client service to retrieve the currently logged in
-      // user to set a local profile state variable
       const user = await service.profile();
       setProfile(user);
-    } catch (e) { // If there's no one logged in
-      navigate('/login'); // navigate back to login screen
+    } catch (e) {
+      navigate('/login');
     }
   }, []);
+
+  /**
+   * Helper function for destroy the sessions
+   */
   const logout = () => {
     service.logout()
-        .then(() => navigate('/login'));
+        .then(() => navigate('/login'))
   }
+
   return(
     <div className="ttr-profile">
       <div className="border border-bottom-0">
         <h4 className="p-2 mb-0 pb-0 fw-bolder">
           {profile.username}
-          <i className="fa fa-badge-check text-primary"></i></h4>
+          <i className="fa fa-badge-check text-primary"></i>
+        </h4>
         <span className="ps-2">67.6K Tuits</span>
         <div className="mb-5 position-relative">
           <img className="w-100" src="../images/nasa-profile-header.jpg"/>
@@ -51,7 +59,7 @@ const Profile = () => {
 
         <div className="p-2">
           <h4 className="fw-bolder pb-0 mb-0">
-            {profile.username}<i className="fa fa-badge-check text-primary"></i>
+            {profile.username}<i className="fa fa-badge-check text-primary"/>
           </h4>
           <h6 className="pt-0">@{profile.username}</h6>
           <p className="pt-2">
@@ -87,14 +95,15 @@ const Profile = () => {
                 Media</Link>
             </li>
             <li className="nav-item">
-              <Link to="/profile/likes"
-                    className={`nav-link ${location.pathname.indexOf('/likes') >= 0 ? 'active':''}`}>
+              <Link to="/profile/mylikes"
+                    className={`nav-link ${location.pathname.indexOf('mylikes') >= 0 ? 'active':''}`}>
                 Likes</Link>
             </li>
             <li className="nav-item">
-              <Link to="/profile/dislikes"
-                    className={`nav-link ${location.pathname.indexOf('dislikes') >= 0 ? 'active':''}`}>
-                Dislikes</Link>
+              <Link to="/profile/mydislikes"
+                    className={`nav-link ${location.pathname.indexOf('mydislikes') >= 0 ? 'active':''}`}>
+                Dislikes
+              </Link>
             </li>
           </ul>
         </div>
@@ -103,8 +112,8 @@ const Profile = () => {
         <Route path="/mytuits" element={<MyTuits/>}/>
         <Route path="/tuits-and-replies" element={<TuitsAndReplies/>}/>
         <Route path="/media" element={<Media/>}/>
-        <Route path="/likes" element={<MyLikes/>}/>
-        <Route path="/dislikes" element={<MyDislikes/>}/>
+        <Route path="/mylikes" element={<MyLikes/>}/>
+        <Route path="/mydislikes" element={<MyDislikes/>}/>
       </Routes>
     </div>
   );
