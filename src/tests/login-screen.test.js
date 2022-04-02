@@ -1,13 +1,9 @@
-/**
- * @jest-environment node
- */
 import axios from 'axios';
 import {
   createUser,
   deleteUsersByUsername, findAllUsers,
   findUserById
 } from "../services/users-service";
-import services from "./services";
 import {Login} from "../components/profile/login";
 import {act, fireEvent, render, screen, waitFor} from "@testing-library/react";
 import {HashRouter} from "react-router-dom";
@@ -40,7 +36,7 @@ describe('sss', () => {
 test("find all users mock works", async () => {
   axios.get.mockImplementation(() =>
     Promise.resolve({ data: {users: MOCKED_USERS} }));
-  const response = await services.findAllUsers();
+  const response = await findAllUsers();
   const users = response.users;
   expect(users.length).toEqual(MOCKED_USERS.length);
   users.forEach((user, nth) => {
@@ -52,7 +48,7 @@ describe('fff', () => {
   test("find all users mock works", async () => {
     axios.get.mockImplementation(() =>
       Promise.resolve({ data: {users: MOCKED_USERS} }));
-    const response = await services.findAllUsers();
+    const response = await findAllUsers();
     const users = response.users;
     expect(users.length).toEqual(MOCKED_USERS.length);
     users.forEach((user, nth) => {

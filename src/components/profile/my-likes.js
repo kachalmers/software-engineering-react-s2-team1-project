@@ -1,24 +1,34 @@
 import Tuits from "../tuits";
-import * as service from "../../services/likes-service";
+import * as service from '../../services/likes-service'
 import {useEffect, useState} from "react";
 
+/**
+ * Implements MyLikes Component for displaying all tuits liked by
+ * logged-in user.
+ * @returns {JSX.Element}
+ */
 const MyLikes = () => {
-    // Store likedTuits as state. Set likedTuits with setLikedTuits
+    // Maintain the state of liked tuits
     const [likedTuits, setLikedTuits] = useState([]);
 
-    // Find tuits I like
-    const findTuitsILike = () =>
+    // Find tuits liked by "me"
+    const findTuitsILike = () => {
         service.findAllTuitsLikedByUser("me")
-            // then, set likedTuits to list of tuits I liked
-            .then((tuits) => setLikedTuits(tuits));
+            .then((tuits) => {
+                console.log(tuits);
+                setLikedTuits(tuits)
+            })
+    }
 
-    // Call findTuitsILike once whenever anything on the page changes
-    useEffect(findTuitsILike, []);
-    
-    return(
+    useEffect(()=> {
+        findTuitsILike()
+    }, []);
+
+    return (
         <div>
             <Tuits tuits={likedTuits} refreshTuits={findTuitsILike}/>
         </div>
-    );
-};
+    )
+}
+
 export default MyLikes;

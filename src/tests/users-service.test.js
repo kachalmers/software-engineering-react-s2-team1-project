@@ -1,9 +1,7 @@
-/**
- * @jest-environment node
- */
 import {
   createUser,
-  deleteUsersByUsername, findAllUsers,
+  deleteUsersByUsername,
+  findAllUsers,
   findUserById
 } from "../services/users-service";
 
@@ -47,7 +45,7 @@ describe('deleteUsersByUsername', () => {
     email: 'compromise@solutions.com'
   };
 
-  // setup the tests before verification
+  // set up the tests before verification
   beforeAll(() => {
     // insert the sample user we then try to remove
     return createUser(sowell);
@@ -116,24 +114,29 @@ describe('findAllUsers',  () => {
   ];
 
   // setup data before test
-  beforeAll(() =>
+  beforeAll(() => {
     // insert several known users
-    usernames.map(username =>
-      createUser({
-        username,
-        password: `${username}123`,
-        email: `${username}@stooges.com`
-      })
-    )
-  );
+    let promises = []
+    usernames.map((username) => {
+      let createPromise = createUser({
+                                       username,
+                                       password: `${username}123`,
+                                       email: `${username}@stooges.com`});
+      promises.push(createPromise)
+    })
+    return Promise.all(promises);
+  });
 
   // clean up after ourselves
-  afterAll(() =>
+  afterAll(() => {
     // delete the users we inserted
-    usernames.map(username =>
-      deleteUsersByUsername(username)
-    )
-  );
+    let promises = []
+    usernames.map((username) => {
+      let deletePromise = deleteUsersByUsername(username);
+      promises.push(deletePromise)
+    })
+    return Promise.all(promises)
+  });
 
   test('can retrieve all users from REST API', async () => {
     // retrieve all the users
