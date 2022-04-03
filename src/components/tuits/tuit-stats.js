@@ -16,7 +16,7 @@ const TuitStats = ({tuit, toggleLikes, toggleDislikes}) => {
                 <i className="far fa-message me-1"></i>
                 {
                     tuit.stats &&
-                    <span className='ttr-stats-replies'>{tuit.stats.replies}</span>}
+                    <span className='ttr-stats-replies'>{tuit.stats.replies}</span>
                 }
             </div>
             <div className="col">
