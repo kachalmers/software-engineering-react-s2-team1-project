@@ -6,30 +6,28 @@ import {
 } from "../services/users-service";
 
 describe('createUser', () => {
-  // sample user to insert
+  // Mocked user
   const ripley = {
     username: 'ellenripley',
     password: 'lv426',
     email: 'ellenripley@aliens.com'
   };
 
-  // setup test before running test
+  // Set up test
   beforeAll(() => {
-    // remove any/all users to make sure we create it in the test
+    // Remove users with test user username
     return deleteUsersByUsername(ripley.username);
   })
 
-  // clean up after test runs
+  // Clean up after tests
   afterAll(() => {
-    // remove any data we created
+    // Remove users with username of mocked user
     return deleteUsersByUsername(ripley.username);
   })
 
   test('can insert new users with REST API', async () => {
-    // insert new user in the database
     const newUser = await createUser(ripley);
 
-    // verify inserted user's properties match parameter user
     expect(newUser.username).toEqual(ripley.username);
     expect(newUser.password).toEqual(ripley.password);
     expect(newUser.email).toEqual(ripley.email);
@@ -37,85 +35,82 @@ describe('createUser', () => {
 });
 
 describe('deleteUsersByUsername', () => {
-
-  // sample user to delete
-  const sowell = {
-    username: 'thommas_sowell',
-    password: 'compromise',
-    email: 'compromise@solutions.com'
+  const sharpay = {
+    username: 'sharpay_evans',
+    password: 'fabulous',
+    email: 'super@star.com'
   };
 
-  // set up the tests before verification
+  // Set up test
   beforeAll(() => {
-    // insert the sample user we then try to remove
-    return createUser(sowell);
+    return createUser(sharpay);
   });
 
-  // clean up after test runs
+  // Clean up tests
   afterAll(() => {
-    // remove any data we created
-    return deleteUsersByUsername(sowell.username);
+    // Delete users with mock user username
+    return deleteUsersByUsername(sharpay.username);
   })
 
   test('can delete users from REST API by username', async () => {
-    // delete a user by their username. Assumes user already exists
-    const status = await deleteUsersByUsername(sowell.username);
+    // Remove users with mock user username
+    const status = await deleteUsersByUsername(sharpay.username);
 
-    // verify we deleted at least one user by their username
+    // Check we removed a user
     expect(status.deletedCount).toBeGreaterThanOrEqual(1);
   });
 });
 
 describe('findUserById',  () => {
-  // sample user we want to retrieve
-  const adam = {
-    username: 'adam_smith',
-    password: 'not0sum',
-    email: 'wealth@nations.com'
+  // Mocked user
+  const john = {
+    username: 'john_smith',
+    password: 'goldizgud',
+    email: 'adventure@beyond.com'
   };
 
-  // setup before running test
+  // Set up test
   beforeAll(() => {
-    // clean up before the test making sure the user doesn't already exist
-    return deleteUsersByUsername(adam.username)
+    // Clear users with mock username
+    return deleteUsersByUsername(john.username)
   });
 
-  // clean up after ourselves
+  // Clean up tests
   afterAll(() => {
-    // remove any data we inserted
-    return deleteUsersByUsername(adam.username);
+    // Remove users with mocked user username
+    return deleteUsersByUsername(john.username);
   });
 
   test('can retrieve user from REST API by primary key', async () => {
-    // insert the user in the database
-    const newUser = await createUser(adam);
+    // Insert user into database
+    const newUser = await createUser(john);
 
-    // verify new user matches the parameter user
-    expect(newUser.username).toEqual(adam.username);
-    expect(newUser.password).toEqual(adam.password);
-    expect(newUser.email).toEqual(adam.email);
+    // Check new user matches our mocked user
+    expect(newUser.username).toEqual(john.username);
+    expect(newUser.password).toEqual(john.password);
+    expect(newUser.email).toEqual(john.email);
 
-    // retrieve the user from the database by its primary key
+    // Find user by their primary key
     const existingUser = await findUserById(newUser._id);
 
-    // verify retrieved user matches parameter user
-    expect(existingUser.username).toEqual(adam.username);
-    expect(existingUser.password).toEqual(adam.password);
-    expect(existingUser.email).toEqual(adam.email);
+    // Check user found with api matched our mocked user
+    expect(existingUser.username).toEqual(john.username);
+    expect(existingUser.password).toEqual(john.password);
+    expect(existingUser.email).toEqual(john.email);
   });
 });
 
 
 describe('findAllUsers',  () => {
 
-  // sample users we'll insert to then retrieve
+  // List of usernames
   const usernames = [
     "larry", "curley", "moe"
   ];
 
-  // setup data before test
+  // Set up test
   beforeAll(() => {
-    // insert several known users
+    // Insert users with usernames from our list of usernames
     let promises = []
     usernames.map((username) => {
       let createPromise = createUser({
@@ -127,10 +122,10 @@ describe('findAllUsers',  () => {
     return Promise.all(promises);
   });
 
-  // clean up after ourselves
+  // Clean up tests
   afterAll(() => {
-    // delete the users we inserted
     let promises = []
+    // Remove users with usernames matching any we created for the test
     usernames.map((username) => {
       let deletePromise = deleteUsersByUsername(username);
       promises.push(deletePromise)
@@ -139,17 +134,17 @@ describe('findAllUsers',  () => {
   });
 
   test('can retrieve all users from REST API', async () => {
-    // retrieve all the users
+    // Retrieve all users
     const users = await findAllUsers();
 
-    // there should be a minimum number of users
+    // Number of users should be at least as long as our usernames list
     expect(users.length).toBeGreaterThanOrEqual(usernames.length);
 
-    // let's check each user we inserted
+    // Get list of users we made that are in the database
     const usersWeInserted = users.filter(
       user => usernames.indexOf(user.username) >= 0);
 
-    // compare the actual users in database with the ones we sent
+    // Compare users from database with our mocked users we inserted
     usersWeInserted.forEach(user => {
       const username = usernames.find(username => username === user.username);
       expect(user.username).toEqual(username);

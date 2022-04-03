@@ -24,7 +24,7 @@ test('user list renders async', async () => {
     <HashRouter>
       <UserList users={users}/>
     </HashRouter>);
-  const linkElement = screen.getByText(/nasa/i);
+  const linkElement = screen.getByText(/alice/i);
   expect(linkElement).toBeInTheDocument();
 })
 
@@ -32,8 +32,6 @@ test('user list renders mocked', async () => {
   const mock = jest.spyOn(axios, 'get');
   mock.mockImplementation(() =>
                               Promise.resolve({data: {users: MOCKED_USERS}}));
-  // axios.get.mockImplementation(() =>
-  //   Promise.resolve({ data: {users: MOCKED_USERS} }));
   const response = await findAllUsers();
   const users = response.users;
 
