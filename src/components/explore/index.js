@@ -1,7 +1,47 @@
-import React from "react";
-const Explore = () => {
+/**
+ * @file Implements Profile component for displaying user explore page
+ */
+import React, {useEffect, useState} from "react";
+import AllTuits from "./all-tuits"; // import MyTuits to render in explore screen
+import {Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import MyLikes from "./my-likes";
+import TuitsByTag from "./tuits-by-tag";
+
+const Profile = () => {
+  const location = useLocation();
+
   return(
-    <h1>Explore Screen</h1>
+    <div className="ttr-explore">
+      <div className="border border-bottom-0">
+        <h4 className="p-2 mb-0 pb-0 fw-bolder">
+          Explore
+        </h4>
+        <div className="p-2">
+          <ul className="mt-0 nav nav-pills nav-fill">
+            <li className="nav-item">
+              <Link to="/explore/alltuits"
+                    className={`nav-link ${location.pathname.indexOf('alltuits') >= 0 ? 'active':''}`}>
+                Tuits</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/explore/mylikes"
+                    className={`nav-link ${location.pathname.indexOf('mylikes') >= 0 ? 'active':''}`}>
+                Likes</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/explore/tuitsbytag"
+                    className={`nav-link ${location.pathname.indexOf('tuitsbytag') >= 0 ? 'active':''}`}>
+                Tuits By Tag</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <Routes>
+        <Route path="/alltuits" element={<AllTuits/>}/>
+        <Route path="/mylikes" element={<MyLikes/>}/>
+        <Route path="/tuitsbytag" element={<TuitsByTag/>}/>
+      </Routes>
+    </div>
   );
-};
-export default Explore;
+}
+export default Profile;
