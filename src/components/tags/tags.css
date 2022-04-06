@@ -1,0 +1,17 @@
+.ttr-tags .ttr-tag-avatar-logo {
+    width: 48px;
+}
+
+.ttr-tags .ttr-tag-image-overlay {
+    left: 10px;
+}
+
+.ttr-tags .ttr-responsive-video::after {
+    display: block;
+    content: "";
+    padding-top: 56.25%;
+}
+
+.tag-button {
+    cursor: pointer;
+}
