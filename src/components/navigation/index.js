@@ -7,7 +7,7 @@ function Navigation() {
     const links = [
         {label: 'Tuiter', icon: 'fa-square-t', path: '/tuiter'},
         {label: 'Home', icon: 'fa-home', path: '/home'},
-        {label: 'Explore', icon: 'fa-hashtag', path: '/explore'},
+        {label: 'Explore', icon: 'fa-hashtag', path: '/explore/alltuits'},
         {label: 'Notifications', icon: 'fa-bell', path: '/notifications'},
         {label: 'Messages', icon: 'fa-envelope', path: '/messages'},
         {label: 'Bookmarks', icon: 'fa-bookmark', path: '/bookmarks'},
