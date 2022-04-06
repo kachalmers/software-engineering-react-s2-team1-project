@@ -2,10 +2,8 @@
  * @file Implement Tag component for displaying each tag
  */
 import React from "react";
-import {Link, useNavigate} from "react-router-dom";
 
 const Tag = ({tag}) => {
-    const navigate = useNavigate();
 
     return (
         <div className="row">
