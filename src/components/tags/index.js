@@ -51,10 +51,10 @@ const Tags = ({tags = [], refreshTags}) => {
 
     /**
      * Delete tag using API.
-     * @param tid Primary key of tag
+     * @param tagID Primary key of tag
      */
-    const deleteTag = (tid) =>
-        tagService.deleteTag(tid)
+    const deleteTag = (tagID) =>
+        tagService.deleteTag(tagID)
             .then(refreshTags);
 
     return (
