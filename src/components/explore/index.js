@@ -6,6 +6,7 @@ import AllTuits from "./all-tuits"; // import MyTuits to render in explore scree
 import {Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import MyLikes from "./my-likes";
 import TuitsByTag from "./tuits-by-tag";
+import AllTags from "./all-tags";
 
 const Profile = () => {
   const location = useLocation();
@@ -33,6 +34,11 @@ const Profile = () => {
                     className={`nav-link ${location.pathname.indexOf('tuitsbytag') >= 0 ? 'active':''}`}>
                 Tuits By Tag</Link>
             </li>
+            <li className="nav-item">
+              <Link to="/explore/alltags"
+                    className={`nav-link ${location.pathname.indexOf('alltags') >= 0 ? 'active':''}`}>
+                All Tags</Link>
+            </li>
           </ul>
         </div>
       </div>
@@ -40,6 +46,7 @@ const Profile = () => {
         <Route path="/alltuits" element={<AllTuits/>}/>
         <Route path="/mylikes" element={<MyLikes/>}/>
         <Route path="/tuitsbytag" element={<TuitsByTag/>}/>
+        <Route path="/alltags" element={<AllTags/>}/>
       </Routes>
     </div>
   );
