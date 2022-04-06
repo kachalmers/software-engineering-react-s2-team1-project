@@ -1,5 +1,5 @@
 /**
- * @file Implements the service for tuits
+ * @file Implements the service for tags
  */
 import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -23,21 +23,10 @@ export const findAllTags = () =>
         .then(response => response.data);
 
 /**
- * Uses API to retrieve a tags by its primary key.
- * @param tid Primary key of tag
- * @returns {Promise<AxiosResponse<any>>} JSON with tag
- */
-/*
-export const findTagById = (tid) =>
-    api.get(`${TAGS_API}/${tid}`)
-        .then(response => response.data);
-*/
-
-/**
- * Use API to delete a given tuit.
- * @param {Tuit} tid Primary key of tuit
+ * Use API to delete a given tag.
+ * @param {Tag} tagID Primary key of tag
  * @returns {Promise<AxiosResponse<any>>} Status
  */
-export const deleteTag = (tid) =>
-    api.delete(`${TAGS_API}/${tid}`)
+export const deleteTag = (tagID) =>
+    api.delete(`${TAGS_API}/${tagID}`)
         .then(response => response.data);
