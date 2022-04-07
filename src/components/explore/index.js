@@ -8,7 +8,7 @@ import MyLikes from "./my-likes";
 import TuitsByTag from "./tuits-by-tag";
 import AllTags from "./all-tags";
 
-const Profile = () => {
+const Explore = () => {
   const location = useLocation();
 
   return(
@@ -51,4 +51,4 @@ const Profile = () => {
     </div>
   );
 }
-export default Profile;
+export default Explore;
