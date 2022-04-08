@@ -7,6 +7,7 @@ import {Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import MyLikes from "./my-likes";
 import TuitsByTag from "./tuits-by-tag";
 import AllTags from "./all-tags";
+import SearchATag from "./search-list-item";
 
 const Explore = () => {
   const location = useLocation();
@@ -46,6 +47,7 @@ const Explore = () => {
         <Route path="/alltuits" element={<AllTuits/>}/>
         <Route path="/mylikes" element={<MyLikes/>}/>
         <Route path="/tuitsbytag" element={<TuitsByTag/>}/>
+        <Route path="/tuitsbytag/:tagString" element={<SearchATag/>}/>
         <Route path="/alltags" element={<AllTags/>}/>
       </Routes>
     </div>

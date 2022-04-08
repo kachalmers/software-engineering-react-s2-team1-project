@@ -28,8 +28,6 @@ const TuitsByTag = () => {
             </div>
             <Tuits tuits={tuits} refreshTuits={findTuitsWithTag}/>
         </div>
-
-
     )
 }
 
