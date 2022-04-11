@@ -33,6 +33,7 @@ function Tuiter () {
               <Route path="/tuiter/:uid" element={<Home/>}/>
               <Route path="/home" element={<Home/>}/>
               <Route path="/home/:uid" element={<Home/>}/>
+              <Route path="/explore" element={<Explore/>}/>
               <Route path="/explore/*" element={<Explore/>}/>
               <Route path="/notifications" element={<Notifications/>}/>
               <Route path="/messages" element={<Messages/>}/>
