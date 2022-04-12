@@ -1,8 +1,14 @@
 import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import * as service from "../../services/tuits-service";
 import Tuits from "../tuits"
 
 const TuitsByTag = () => {
+
+    //Uses Parameters to search
+    const {tagSearch} = useParams();
+    const navigate = useNavigate();
+
     const [tuits, setTuits] = useState([]);
     const [tempTag, setTempTag] = useState('');
     const [tag, setTag] = useState('');
@@ -23,9 +29,10 @@ const TuitsByTag = () => {
         setTag(tempTag);    // Set tag to what was entered
     };
 
-    const findTuitsWithTag = () => {
+    const findTuitsWithTag = ({tagSearch}) => {
         // #KAC
         // findAllTuits in next line to be changed to findTuitsWithTag({tag})
+        console.log("Searched by " + {tagSearch})
         service.findAllTuits()
             .then(tuits => {
                 setTuits(tuits);
@@ -55,9 +62,7 @@ const TuitsByTag = () => {
             } else {
                 findAllTuits(); // currently shows no tuits right now
             }
-
         }
-
     }
 
     // Log won't pick up on updates to states of objects until right before the return...
@@ -81,7 +86,12 @@ const TuitsByTag = () => {
                         <option value="RECENT" selected = "selected">Sort By: Most Recent</option>
                     </select>
 
-                    <button className = "btn-primary border-0 float-end rounded-pill">Search</button>
+                    <button onClick={() =>
+                        //add into param of findTuitsWithTag
+                        navigate("/explore/tuitsbytag/" + tempTag)}
+                        className = "btn-primary border-0 float-end rounded-pill">
+                        Search
+                    </button>
                 </div>
             </div>
             <Tuits tuits={tuits} refreshTuits={findTuitsWithTag}/>
