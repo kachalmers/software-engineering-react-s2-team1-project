@@ -1,18 +1,22 @@
 import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import * as service from "../../services/tuits-service";
 import Tuits from "../tuits"
 
 const SearchedTag = (tagString) => {
+    const {tagSearch} = useParams();
     const [tuits, setTuits] = useState([]);
-    const [tempTag, setTempTag] = useState('');
+    const [tempTag, setTempTag] = useState(tagSearch);
     const navigate = useNavigate();
-    const findTuitsWithTag = (tagString) => {
+    const findTuitsWithTag = (tagSearch) => {
         // #KAC-findTuitsWithTag
+        /*
         service.findAllTuits()
             .then(tuits => {
                 setTuits(tuits);
             })
+         */
+
     };
 
     useEffect(() => {
@@ -25,8 +29,9 @@ const SearchedTag = (tagString) => {
                 <i className="fas fa-search position-absolute"></i>
                 <input className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
                        placeholder="Search Tuits By Tag"
-                        value= {tagString}
-                    //onChange={console.log(this.state.value)}
+                        value= {tempTag}
+                       onChange={(event)=>
+                           setTempTag(event.target.value)}
                 />
                 <div className="mt-2 position-relative">
                     <select name="selectSort"
