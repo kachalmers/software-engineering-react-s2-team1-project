@@ -30,3 +30,5 @@ export const findAllTags = () =>
 export const deleteTag = (tagID) =>
     api.delete(`${TAGS_API}/${tagID}`)
         .then(response => response.data);
+
+

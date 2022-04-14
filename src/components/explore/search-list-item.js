@@ -1,14 +1,15 @@
 import {useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import * as service from "../../services/tuits-service";
+import * as service from "../../services/tuit2tags-service";
 import Tuits from "../tuits"
 
-const SearchedTag = (tagString) => {
-    const {tagSearch} = useParams();
+const SearchedTag = () => {
+    let { tagSearch } = useParams();
     const [tuits, setTuits] = useState([]);
     const [tempTag, setTempTag] = useState(tagSearch);
     const navigate = useNavigate();
-    const findTuitsWithTag = (tagSearch) => {
+
+    const findTuitsWithTag = () => {
         // #KAC-findTuitsWithTag
         /*
         service.findAllTuits()
@@ -16,11 +17,15 @@ const SearchedTag = (tagString) => {
                 setTuits(tuits);
             })
          */
-
+        service.findTuitsWithTag(tagSearch)
+            .then(tuits => {
+                setTuits(tuits);
+            });
     };
 
     useEffect(() => {
         findTuitsWithTag()
+        console.log(tagSearch + "<- Searched tag")
     }, []);
 
     return (

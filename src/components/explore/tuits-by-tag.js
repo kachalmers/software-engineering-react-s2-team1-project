@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import * as service from "../../services/tuits-service";
+import * as tagService from "../../services/tuit2tags-service";
 import Tuits from "../tuits"
 
 const TuitsByTag = () => {
@@ -29,6 +30,20 @@ const TuitsByTag = () => {
         setTag(tempTag);    // Set tag to what was entered
     };
 
+
+    const goToSearch = () => {
+        console.log(tempTag);
+        let response = tagService.findTuitsWithTag(tagSearch);
+        tagService.findTuitsWithTag(tagSearch)
+            .then(tuits => {
+               setTuits(tuits);
+            });
+        //setTuits(response);
+        console.log("Tuits with " + tempTag + " added!");
+        console.log(tuits.length);
+        //navigate(tempTag);
+    }
+
     const findTuitsWithTag = () => {
         // #KAC
         // findAllTuits in next line to be changed to findTuitsWithTag({tag})
@@ -44,6 +59,7 @@ const TuitsByTag = () => {
         //setTuits([]);// Show no tuits...
         findTuitsWithTag();
         console.log("Use Effect activated");
+        goToSearch();
         /*
         Note: this can later be changed to show all tuits with any tag.
         This can later be discussed by the team how we want to present this
@@ -78,14 +94,12 @@ const TuitsByTag = () => {
             <div className="ttr-search position-relative">
                 <i className="fas fa-search position-absolute"></i>
 
-
                 <input className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
                        placeholder="Search Tuits By Tag"
                        value={tempTag}
                        onChange={(event)=>
                             setTempTag(event.target.value)}
                 />
-
 
 
             </div>
@@ -100,7 +114,7 @@ const TuitsByTag = () => {
 
                     <button onClick={() =>
                         //add into param of findTuitsWithTag
-                        navigate(tempTag)
+                        {goToSearch()}
                     }
                         className = "btn-primary border-0 float-end rounded-pill">
                         Search
@@ -108,7 +122,7 @@ const TuitsByTag = () => {
                 </div>
             </div>
             <br/>
-            <Tuits tuits={tuits} refreshTuits={findTuitsWithTag}/>
+            <Tuits tuits={tuits} refreshTuits={goToSearch}/>
         </div>
     )
 }
