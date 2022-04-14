@@ -47,7 +47,7 @@ const Explore = () => {
         <Route path="/alltuits" element={<AllTuits/>}/>
         <Route path="/mylikes" element={<MyLikes/>}/>
         <Route path="/tuitsbytag" element={<TuitsByTag/>}/>
-        <Route path="/tuitsbytag/:tagString" element={<SearchATag/>}/>
+        <Route path="/tuitsbytag/:tagString" element={<TuitsByTag/>}/>
         <Route path="/alltags" element={<AllTags/>}/>
       </Routes>
     </div>

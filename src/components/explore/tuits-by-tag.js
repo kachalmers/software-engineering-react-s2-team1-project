@@ -5,7 +5,6 @@ import * as tagService from "../../services/tuit2tags-service";
 import Tuits from "../tuits"
 
 const TuitsByTag = () => {
-
     //Uses Parameters to search
     const {tagSearch} = useParams();
     const navigate = useNavigate();
@@ -24,7 +23,6 @@ const TuitsByTag = () => {
             .then(tuits => {
                 setTuits(tuits);
             })
-
          */
         setTuits([]);   // set tuits to empty array
         setTag(tempTag);    // Set tag to what was entered
@@ -32,26 +30,27 @@ const TuitsByTag = () => {
 
 
     const goToSearch = () => {
-        console.log(tempTag);
-        let response = tagService.findTuitsWithTag(tagSearch);
-        tagService.findTuitsWithTag(tagSearch)
-            .then(tuits => {
-               setTuits(tuits);
+        console.log(tempTag + ". This is the tempTag");
+        console.log(tagSearch + ". This is the TagSearch");
+        const tuitArray = tagService.findTuitsWithTag(tagSearch);
+        console.log(tuitArray);
+        tagService.findTuitsWithTag(tempTag)
+            .then(newTuits => {
+                setTuits(newTuits);
             });
-        //setTuits(response);
         console.log("Tuits with " + tempTag + " added!");
-        console.log(tuits.length);
-        //navigate(tempTag);
+        //console.log(tuits.length);
+        navigate(tempTag);
     }
 
     const findTuitsWithTag = () => {
         // #KAC
         // findAllTuits in next line to be changed to findTuitsWithTag({tag})
-        console.log("Searched by " + {tagSearch})
+        console.log("Page Opened: This is the Param: -->" + tagSearch + "<--")
         service.findAllTuits()
-            .then(tuits => {
-                setTuits(tuits);
-            })
+                .then(tuits => {
+                    setTuits(tuits);
+                })
     };
 
     // When we first load the page...
@@ -59,7 +58,7 @@ const TuitsByTag = () => {
         //setTuits([]);// Show no tuits...
         findTuitsWithTag();
         console.log("Use Effect activated");
-        goToSearch();
+        //goToSearch();
         /*
         Note: this can later be changed to show all tuits with any tag.
         This can later be discussed by the team how we want to present this
@@ -122,7 +121,7 @@ const TuitsByTag = () => {
                 </div>
             </div>
             <br/>
-            <Tuits tuits={tuits} refreshTuits={goToSearch}/>
+            <Tuits tuits={tuits} refreshTuits={findTuitsWithTag}/>
         </div>
     )
 }
