@@ -1,19 +1,31 @@
 import {useEffect, useState} from "react";
-import * as service from "../../services/tuits-service";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import * as service from "../../services/tuit2tags-service";
 import Tuits from "../tuits"
 
-const SearchedTag = (tagString) => {
+const SearchedTag = () => {
+    let { tagSearch } = useParams();
     const [tuits, setTuits] = useState([]);
-    const findTuitsWithTag = (tagString) => {
+    const [tempTag, setTempTag] = useState(tagSearch);
+    const navigate = useNavigate();
+
+    const findTuitsWithTag = () => {
         // #KAC-findTuitsWithTag
+        /*
         service.findAllTuits()
             .then(tuits => {
                 setTuits(tuits);
             })
+         */
+        service.findTuitsWithTag(tagSearch)
+            .then(tuits => {
+                setTuits(tuits);
+            });
     };
 
     useEffect(() => {
         findTuitsWithTag()
+        console.log(tagSearch + "<- Searched tag")
     }, []);
 
     return (
@@ -22,10 +34,28 @@ const SearchedTag = (tagString) => {
                 <i className="fas fa-search position-absolute"></i>
                 <input className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
                        placeholder="Search Tuits By Tag"
-                    value= {tagString}
-                    //onChange={console.log(this.state.value)}
+                        value= {tempTag}
+                       onChange={(event)=>
+                           setTempTag(event.target.value)}
                 />
+                <div className="mt-2 position-relative">
+                    <select name="selectSort"
+                            defaultValue="RECENT"
+                            id = "selectSort">
+                        <option value="LIKES">Sort By: Most Likes</option>
+                        <option value="RECENT">Sort By: Most Recent</option>
+                    </select>
+
+                    <button onClick={() =>
+                        //add into param of findTuitsWithTag
+                        navigate(tempTag)
+                    }
+                            className = "btn-primary border-0 float-end rounded-pill">
+                        Search
+                    </button>
+                </div>
             </div>
+            <br/>
             <Tuits tuits={tuits} refreshTuits={findTuitsWithTag}/>
         </div>
     )

@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "../navigation";
 import WhatsHappening from "../whats-happening";
-import {BrowserRouter, Routes, Route, HashRouter} from "react-router-dom";
+import {Routes, Route, HashRouter} from "react-router-dom";
 import Home from "../home";
 import Bookmarks from "../bookmarks";
 import Profile from "../profile";
@@ -15,6 +15,7 @@ import More from "../more";
 import {Login} from "../profile/login";
 import Signup from "../profile/signup";
 import TuitScreen from "../tuits/tuit-screen";
+import TuitByTag from "../explore/tuits-by-tag";
 
 function Tuiter () {
   return(
