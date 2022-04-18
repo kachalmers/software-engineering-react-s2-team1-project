@@ -60,9 +60,10 @@ const Tuits = ({tuits = [], refreshTuits}) => {
     /**
      * Modify tuit using API
      * @param tid Primary Key of tuit
+     * @param newTuit New String for Tuit
      */
-    const modifyTuit = (tid) =>
-        tuitService.modifyTuit(tid)
+    const updateTuit = (tid, newTuit) =>
+        tuitService.updateTuit(tid, newTuit)
             .then(refreshTuits);
 
 
@@ -76,6 +77,7 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                     deleteTuit={deleteTuit}
                     toggleLikes={toggleLikes}
                     toggleDislikes={toggleDislikes}
+                    updateTuit={updateTuit}
                     tuit={tuit}/>
             );
           })
