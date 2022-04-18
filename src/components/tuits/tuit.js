@@ -51,6 +51,10 @@ const Tuit = ({tuit, deleteTuit, toggleLikes, toggleDislikes}) => {
                 { tuit.ownedByMe === true &&
                     <i onClick={() => deleteTuit(tuit._id)}
                        className="fas fa-remove tuit-button fa-2x fa-pull-right"
+                    ></i>}
+                { tuit.ownedByMe === true &&
+                    <i onClick={() => updateTuit(tuit._id)}
+                        className ="fas fa-plus-square tuit-button fa-2x fa-pull-right"
                     ></i>
                 }
                 <Link to={`/tuit/${tuit._id}`}>

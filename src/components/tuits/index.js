@@ -66,7 +66,6 @@ const Tuits = ({tuits = [], refreshTuits}) => {
         tuitService.updateTuit(tid, newTuit)
             .then(refreshTuits);
 
-
     return (
     <div>
       <ul className="ttr-tuits list-group">
