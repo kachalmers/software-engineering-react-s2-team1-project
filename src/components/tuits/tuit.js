@@ -7,7 +7,7 @@ import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
 import {Link} from "react-router-dom";
 
-const Tuit = ({tuit, deleteTuit, toggleLikes, toggleDislikes}) => {
+const Tuit = ({tuit, deleteTuit, updateTuit, toggleLikes, toggleDislikes}) => {
     const daysOld = (tuit) => {
         const now = new Date();
         const nowMillis = now.getTime();
