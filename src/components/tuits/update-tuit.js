@@ -6,22 +6,27 @@ import {updateTuit} from "../../services/tuits-service";
 
 const TuitScreen = () => {
     const [tuit, setTuit] = useState({});
+    const [newTuit, setNewTuit] = useState('');
     const {tid} = useParams();
-    const findTuitById = () =>
+    const findCurrentTuit = () =>
         service.findTuitById(tid)
             .then(tuit => setTuit(tuit));
-    useEffect(findTuitById, []);
+    useEffect(findCurrentTuit, []);
     return(
         <div>
+
             <input className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
-                   value=tuit.tuit/>
-            <Tuit tuit={tuit}/>
-            <i onClick = {()=>updateTuit(tid, tuit)}
+                   placeholder = {tuit.tuit}
+                value = {newTuit}
+                   onChange={(event)=>
+                       setNewTuit(event.target.value)}/>
+
+            <button onClick = {()=>updateTuit(tid, newTuit)}
                 className = "float-end tuit-button me-1">
                 Update
-            </i>
-            <Link to={`/`}>
-                <i className="float-end tuit-button me-1"> Cancel </i>
+            </button>
+            <Link to={`/home`}>
+                <button className="float-end tuit-button me-1"> Cancel </button>
             </Link>
         </div>
     );
