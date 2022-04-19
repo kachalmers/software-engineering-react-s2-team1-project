@@ -8,7 +8,7 @@ import {api} from "../services/dislikes-service";
 import {HashRouter} from "react-router-dom";
 
 // List of mocked disliked tuits
-const MOCKED_DISLIKED_TUITS = [
+const MOCKED_TAG_TUITS = [
     {
         tuit: "Explore screen test #TestyTestTest",
         postedBy: {
@@ -47,7 +47,7 @@ const MOCKED_DISLIKED_TUITS = [
     }
 ];
 
-describe('my explore screen renders mocked tuits with hashtags'
+describe('my explore screen renders mocked tuits with hashtags '
     + 'and displays correct tags', () => {
     const mock = jest.spyOn(api, 'get');
 
@@ -55,25 +55,25 @@ describe('my explore screen renders mocked tuits with hashtags'
         mock.mockRestore();
     })
 ///////////////////////////////////////////////////////////////////////
-    test('my dislikes screen renders disliked mocked tuit '
-        + 'and displays correct dislikes count', async () => {
+    test('my explore screen renders mocked tuits with hashtags '
+        + 'and displays correct tags', async () => {
         mock.mockImplementation(() => {
-            return  Promise.resolve({data: MOCKED_DISLIKED_TUITS});
+            return  Promise.resolve({data: MOCKED_TAG_TUITS});
         });
 
         render(
             <HashRouter>
-                <MyDislikes/>
+                <Explore/>
             </HashRouter>
         )
 
         await waitFor(() => {
-            MOCKED_DISLIKED_TUITS.map(tuit => {
+            MOCKED_TAG_TUITS.map(tuit => {
                 // Store username of tuit poster
                 let username = tuit.postedBy.username;
 
-                // Store dislikes count of tuit
-                const dislikesCount = tuit.stats.dislikes;
+                // Store tag(s) from tuit
+                const tags = tuit.tuit; // Add in way to parse out tag from text using split
 
                 // Get username from screen by username
                 const usernameElements =  screen
@@ -89,7 +89,7 @@ describe('my explore screen renders mocked tuits with hashtags'
                 tuitElements.forEach(e => expect(e).toBeInTheDocument());
 
                 // Expect the dislikes count of the tuit to be in the document
-                expect(screen.getByText(dislikesCount)).toBeInTheDocument();
+                expect(screen.getByText(tags)).toBeInTheDocument();
             })
         })
     })
