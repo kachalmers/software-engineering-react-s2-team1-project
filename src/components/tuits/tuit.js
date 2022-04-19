@@ -7,7 +7,7 @@ import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
 import {Link} from "react-router-dom";
 
-const Tuit = ({tuit, deleteTuit, toggleLikes, toggleDislikes}) => {
+const Tuit = ({tuit, deleteTuit, toggleLikes, toggleDislikes, toggleFollow}) => {
     const daysOld = (tuit) => {
         const now = new Date();
         const nowMillis = now.getTime();
@@ -56,8 +56,18 @@ const Tuit = ({tuit, deleteTuit, toggleLikes, toggleDislikes}) => {
                 <Link to={`/tuit/${tuit._id}`}>
                     <i className="float-end tuit-button fas fa-circle-ellipsis me-1"></i>
                 </Link>
-                <h2
-                    className="fs-5">
+                <h2 className="fs-5">
+                    <span className='ttr-follow-tuit-author-click'
+                          onClick={() => toggleFollow(tuit)} >
+                        {
+                            tuit.tuitAuthorFollowedByMe === true &&
+                            <i className="fa fa-user-check me-1" style={{color: 'blue'}}></i>
+                        }
+                        {
+                            !tuit.tuitAuthorFollowedByMe &&
+                            <i className="far fa-user-plus me-1"></i>
+                        }
+                    </span>
                     {tuit.postedBy && tuit.postedBy.username}
                     @{tuit.postedBy && tuit.postedBy.username} -
                     <span className="ms-1">{daysOld(tuit)}</span>

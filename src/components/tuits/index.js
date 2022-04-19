@@ -8,6 +8,7 @@ import * as likeService from "../../services/likes-service";
 import * as dislikeService from "../../services/dislikes-service";
 import * as tuitService from '../../services/tuits-service';
 import * as authService from "../../services/auth-service";
+import * as followService from "../../services/follows-service";
 
 const Tuits = ({tuits = [], refreshTuits}) => {
     const [profile, setProfile] = useState(undefined);
@@ -57,6 +58,20 @@ const Tuits = ({tuits = [], refreshTuits}) => {
         tuitService.deleteTuit(tid)
             .then(refreshTuits);
 
+    /**
+     *
+     * @param tuit
+     */
+    const toggleFollow = (tuit) => {
+        if (profile !== undefined) {
+            followService.userTogglesFollow("me", tuit.postedBy)
+                .then(refreshTuits)
+                .catch(e => alert(e));
+        } else {
+            alert("Log in to follow users!")
+        }
+    }
+
     return (
     <div>
       <ul className="ttr-tuits list-group">
@@ -67,6 +82,7 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                     deleteTuit={deleteTuit}
                     toggleLikes={toggleLikes}
                     toggleDislikes={toggleDislikes}
+                    toggleFollow={toggleFollow}
                     tuit={tuit}/>
             );
           })
