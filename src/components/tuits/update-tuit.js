@@ -13,7 +13,8 @@ const TuitScreen = () => {
     useEffect(findTuitById, []);
     return(
         <div>
-            <textarea />
+            <input className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
+                   value=tuit.tuit/>
             <Tuit tuit={tuit}/>
             <i onClick = {()=>updateTuit(tid, tuit)}
                 className = "float-end tuit-button me-1">
