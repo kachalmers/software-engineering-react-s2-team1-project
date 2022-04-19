@@ -6,8 +6,10 @@ import React from "react";
 import MyDislikes from "../components/profile/my-dislikes";
 import {api} from "../services/dislikes-service";
 import {HashRouter} from "react-router-dom";
+import Explore from "../components/explore";
+import TuitsByTag from "../components/explore/tuits-by-tag";
 
-// List of mocked disliked tuits
+// List of mocked tuits w/tags
 const MOCKED_TAG_TUITS = [
     {
         tuit: "Explore screen test #TestyTestTest",
@@ -61,9 +63,10 @@ describe('my explore screen renders mocked tuits with hashtags '
             return  Promise.resolve({data: MOCKED_TAG_TUITS});
         });
 
+        // This was in reference to components > prolife > my-dislikes.js
         render(
             <HashRouter>
-                <Explore/>
+                <TuitsByTag/>
             </HashRouter>
         )
 
