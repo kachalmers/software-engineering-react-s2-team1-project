@@ -73,7 +73,13 @@ describe('my explore screen renders mocked tuits with hashtags '
                 let username = tuit.postedBy.username;
 
                 // Store tag(s) from tuit
-                const tags = tuit.tuit; // Add in way to parse out tag from text using split
+                const splitTuit = tuit.tuit.split(" "); // Parse out tag(s) from the tuit text
+                let tags = [];
+                for (let i = 0; i < splitTuit.length; i++) {
+                    if (splitTuit[i].startsWith('#')) {
+                        tags.push(splitTuit[i].slice(1));
+                    }
+                }
 
                 // Get username from screen by username
                 const usernameElements =  screen
@@ -88,8 +94,11 @@ describe('my explore screen renders mocked tuits with hashtags '
                 // Expect each tuit element found to be in the document
                 tuitElements.forEach(e => expect(e).toBeInTheDocument());
 
-                // Expect the dislikes count of the tuit to be in the document
-                expect(screen.getByText(tags)).toBeInTheDocument();
+                // Expect the tags of the tuit to be in the document
+                tags.forEach(tag => {
+                    expect(screen.getByText(tag)).toBeInTheDocument();
+                })
+                //expect(screen.getByText(tags)).toBeInTheDocument();
             })
         })
     })
