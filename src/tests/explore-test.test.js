@@ -63,7 +63,7 @@ describe('my explore screen renders mocked tuits with hashtags '
             return  Promise.resolve({data: MOCKED_TAG_TUITS});
         });
 
-        // This was in reference to components > prolife > my-dislikes.js
+        // This was in reference to components > profile > my-dislikes.js
         render(
             <HashRouter>
                 <TuitsByTag/>
