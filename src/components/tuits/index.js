@@ -59,8 +59,8 @@ const Tuits = ({tuits = [], refreshTuits}) => {
             .then(refreshTuits);
 
     /**
-     *
-     * @param tuit
+     * Toggle follow of a tuit author using the API.
+     * @param tuit Tuit with author to be followed/unfollowed
      */
     const toggleFollow = (tuit) => {
         if (profile !== undefined) {
@@ -71,6 +71,15 @@ const Tuits = ({tuits = [], refreshTuits}) => {
             alert("Log in to follow users!")
         }
     }
+
+    /**
+     * Modify tuit using API.
+     * @param tid Primary Key of tuit
+     * @param newTuit New String for Tuit
+     */
+    const updateTuit = (tid, newTuit) =>
+        tuitService.updateTuit(tid, newTuit)
+            .then(refreshTuits);
 
     return (
     <div>
@@ -83,6 +92,7 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                     toggleLikes={toggleLikes}
                     toggleDislikes={toggleDislikes}
                     toggleFollow={toggleFollow}
+                    updateTuit={updateTuit}
                     tuit={tuit}/>
             );
           })
