@@ -15,6 +15,7 @@ import More from "../more";
 import {Login} from "../profile/login";
 import Signup from "../profile/signup";
 import TuitScreen from "../tuits/tuit-screen";
+import ModifyScreen from "../tuits/update-tuit";
 import TuitByTag from "../explore/tuits-by-tag";
 
 function Tuiter () {
@@ -44,6 +45,7 @@ function Tuiter () {
               <Route path="/profile/edit" element={<EditProfile/>}/>
               <Route path="/more" element={<More/>}/>
               <Route path="/tuit/:tid" element={<TuitScreen/>}/>
+              <Route path="/update/:tid" element={<ModifyScreen/>}/>
             </Routes>
           </div>
           <div className="ttr-right-column">

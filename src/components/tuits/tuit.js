@@ -2,12 +2,14 @@
  * @file Implement Tuit component for displaying each tuit
  */
 import React from "react";
+
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
-const Tuit = ({tuit, deleteTuit, toggleLikes, toggleDislikes}) => {
+const Tuit = ({tuit, deleteTuit, updateTuit, toggleLikes, toggleDislikes}) => {
+    const navigate = useNavigate();
     const daysOld = (tuit) => {
         const now = new Date();
         const nowMillis = now.getTime();
@@ -51,7 +53,11 @@ const Tuit = ({tuit, deleteTuit, toggleLikes, toggleDislikes}) => {
                 { tuit.ownedByMe === true &&
                     <i onClick={() => deleteTuit(tuit._id)}
                        className="fas fa-remove tuit-button fa-2x fa-pull-right"
-                    ></i>
+                    ></i>}
+                { tuit.ownedByMe === true &&
+                    <Link to={`/update/${tuit._id}`}>
+                       <i className ="fas fa-pen-to-square tuit-button fa-pull-right"></i>
+                    </Link>
                 }
                 <Link to={`/tuit/${tuit._id}`}>
                     <i className="float-end tuit-button fas fa-circle-ellipsis me-1"></i>

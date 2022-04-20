@@ -57,6 +57,15 @@ const Tuits = ({tuits = [], refreshTuits}) => {
         tuitService.deleteTuit(tid)
             .then(refreshTuits);
 
+    /**
+     * Modify tuit using API
+     * @param tid Primary Key of tuit
+     * @param newTuit New String for Tuit
+     */
+    const updateTuit = (tid, newTuit) =>
+        tuitService.updateTuit(tid, newTuit)
+            .then(refreshTuits);
+
     return (
     <div>
       <ul className="ttr-tuits list-group">
@@ -67,6 +76,7 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                     deleteTuit={deleteTuit}
                     toggleLikes={toggleLikes}
                     toggleDislikes={toggleDislikes}
+                    updateTuit={updateTuit}
                     tuit={tuit}/>
             );
           })
