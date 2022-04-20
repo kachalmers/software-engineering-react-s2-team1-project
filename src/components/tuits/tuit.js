@@ -60,11 +60,11 @@ const Tuit = ({tuit, deleteTuit, toggleLikes, toggleDislikes, toggleFollow}) => 
                     <span className='ttr-follow-tuit-author-click'
                           onClick={() => toggleFollow(tuit)} >
                         {
-                            tuit.tuitAuthorFollowedByMe === true &&
+                            !tuit.ownedByMe && tuit.tuitAuthorFollowedByMe === true &&
                             <i className="fa fa-user-check me-1" style={{color: 'blue'}}></i>
                         }
                         {
-                            !tuit.tuitAuthorFollowedByMe &&
+                            !tuit.ownedByMe && !tuit.tuitAuthorFollowedByMe &&
                             <i className="far fa-user-plus me-1"></i>
                         }
                     </span>
