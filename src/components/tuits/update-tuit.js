@@ -6,7 +6,7 @@ import {updateTuit} from "../../services/tuits-service";
 
 const TuitScreen = () => {
     const [tuit, setTuit] = useState({});
-    const [newTuit, setNewTuit] = useState('');
+    const [newTuitString, setNewTuitString] = useState('');
     const {tid} = useParams();
     const findCurrentTuit = () =>
         service.findTuitById(tid)
@@ -17,11 +17,11 @@ const TuitScreen = () => {
 
             <input className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
                    placeholder = {tuit.tuit}
-                value = {newTuit}
-                   onChange={(event)=>
-                       setNewTuit(event.target.value)}/>
+                value = {newTuitString}
+                   onChange={(event) =>
+                       setNewTuitString(event.target.value)}/>
 
-            <button onClick = {()=>updateTuit(tid, newTuit)}
+            <button onClick = {()=>updateTuit(tid, {...tuit, tuit: newTuitString})}
                 className = "float-end tuit-button me-1">
                 Update
             </button>
