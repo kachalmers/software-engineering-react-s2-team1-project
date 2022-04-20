@@ -2,21 +2,21 @@
  * @file Implements tests for tags API
  */
 import {createTuitByUser, deleteTuitByTuitText, findTuitById} from "../services/tuits-service";
-import {findAllTags, deleteTag} from "../services/tags-service";
+import {api, findAllTags, deleteTag} from "../services/tags-service";
+import {findTuitsWithTag} from "../services/tuit2tags-service";
 import {createUser, deleteUsersByUsername} from "../services/users-service";
 
 describe('user can create a tag in a tuit with REST API', () => {
     // Mocked tuit to insert
     const mockedTuit = {
-        tuit: "Tag service test #TestyTestTest",
-        postedOn: "2022-04-19T00:00:00.000Z"
+        tuit: "Let's race, ace! #Sonic"
     }
-////////////////////////////////////////////////////////////////////////////////
+
     // Mocked user to insert
-    const rigby = {
-        username: 'eleanorrigby',
-        password: '70swereatime',
-        email: 'eleanorrigby@beatles.com'
+    const sonic = {
+        username: 'SonicTheHedgehog',
+        password: 'chilidogs',
+        email: 'sonic@sega.com'
     }
 
     // Initialize test variables
@@ -27,36 +27,39 @@ describe('user can create a tag in a tuit with REST API', () => {
     // Set up tests
     beforeAll(async () => {
         let promises = [];  // Initialize an empty list of promises
-
+        console.log("Before user delete");
         // Add promise to remove users with test username to list of promises
-        promises.push(deleteUsersByUsername(rigby.username));
-
+        promises.push(deleteUsersByUsername(sonic.username));
+        console.log("Before tuit delete");
         // Add promise to remove tuits with test text to list of promises
         promises.push(deleteTuitByTuitText(mockedTuit.tuit));
 
         await Promise.all(promises);    // Wait for all promises to be fulfilled
-
+        console.log("Before user creation");
         // Create a new user with mocked user and store their id
-        const author = await createUser(rigby);
+        const author = await createUser(sonic);
         uid = author._id;
-
+        console.log("Created the user");
         // Create a new tuit by user with mocked tuit/user and store its id
         testTuit = await createTuitByUser(author._id, mockedTuit);
         tid = testTuit._id;
+        console.log("Created the tuit by user");
     })
+
+////////////////////////////////////////////////////////////////////////////////
 
     // Clean up after tests
     afterAll(async () => {
-        // If the tuit had dislikes...
-        if (testTuit.stats.dislikes > 0) {
-            // Remove the dislike using the toggle function
-            await userTogglesTuitDislikes(uid, tid);
-        }
+        // If the tuit had tags...
+        // if (testTuit.stats.dislikes > 0) {
+        //     // Remove the tag using the deleteTag function
+        //     await deleteTag(tagID);
+        // }
 
         let promises = []   // Initialize an empty list of promises
 
         // Add promise to delete users by username to list of promises
-        promises.push(deleteUsersByUsername(rigby.username));
+        promises.push(deleteUsersByUsername(sonic.username));
 
         // Add promise to delete tuits by tuit text to list of promises
         promises.push(deleteTuitByTuitText(mockedTuit.tuit));
@@ -65,21 +68,27 @@ describe('user can create a tag in a tuit with REST API', () => {
         return Promise.all(promises);
     })
 
-    test("user can dislike a tuit", async () => {
-        // Test tuit should have 0 dislikes to start
-        expect(testTuit.stats.dislikes).toEqual(0);
+    test("user can create a tag in a tuit with REST API", async () => {
+        // Get all tags
+        const allTags = await findAllTags();
 
-        // Dislike the tuit with dislike toggle function
-        const dislike = await userTogglesTuitDislikes(uid, tid);
+        // Expect at least one tag
+        expect(allTags.length).toBeGreaterThanOrEqual(1);
 
-        testTuit = await findTuitById(tid);  // Retrieve the disliked tuit
+        // Expect #Sonic to be one of the tags
+        let flag = false;
+        for (let i = 0; i < allTags.length; i++) {
+            if (allTags[i].tag == 'Sonic') {
+                flag = true;
+            }
+        }
+        expect(flag).toEqual(true);
 
-        // Test tuit should now have 1 dislike
-        expect(testTuit.stats.dislikes).toEqual(1);
     })
 
 });
 
+/*
 describe('user can undislike a tuit with REST API '
     + 'if they already disliked the tuit', () => {
     // Mocked tuit to insert
@@ -229,10 +238,10 @@ describe("user can dislike a tuit with REST API "
 
         testTuit = await findTuitById(tid);  // Retrieve the liked tuit
 
-        /*
+        /!*
         Test tuit should have 1 like and 0 dislikes to start
         from the test set-up
-         */
+         *!/
         expect(testTuit.stats.likes).toEqual(1);
         expect(testTuit.stats.dislikes).toEqual(0);
 
@@ -283,10 +292,10 @@ describe("can retrieve all tuits disliked by user with REST API", () => {
     beforeAll(async () => {
         let promises = [];  // Initialize an empty list of promises
 
-        /*
+        /!*
         Add promises to remove users with test username and
         remove tuits with test texts to list of promises
-        */
+        *!/
         promises.push(deleteUsersByUsername(rigby.username));
         promises.push(deleteTuitByTuitText(mockedTuit1.tuit));
         promises.push(deleteTuitByTuitText(mockedTuit2.tuit));
@@ -341,10 +350,10 @@ describe("can retrieve all tuits disliked by user with REST API", () => {
 
         let promises = [];  // Initialize an empty list of promises
 
-        /*
+        /!*
         Add promises to remove users with test username and
         remove tuits with test texts to list of promises
-        */
+        *!/
         promises.push(deleteUsersByUsername(rigby.username));
         promises.push(deleteTuitByTuitText(mockedTuit1.tuit));
         promises.push(deleteTuitByTuitText(mockedTuit2.tuit));
@@ -377,4 +386,4 @@ describe("can retrieve all tuits disliked by user with REST API", () => {
         })
 
     })
-})
+})*/

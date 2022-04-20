@@ -22,6 +22,7 @@ export const findAllTags = () =>
     api.get(TAGS_API)
         .then(response => response.data);
 
+
 /**
  * Use API to delete a given tag.
  * @param {Tag} tagID Primary key of tag
