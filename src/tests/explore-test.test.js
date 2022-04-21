@@ -1,6 +1,7 @@
-/**
+/*
+/!**
  * @file Implements tests for the Explore page
- */
+ *!/
 import {render, screen, waitFor} from "@testing-library/react";
 import React from "react";
 import MyDislikes from "../components/profile/my-dislikes";
@@ -105,4 +106,4 @@ describe('my explore screen renders mocked tuits with hashtags '
             })
         })
     })
-});
+});*/
