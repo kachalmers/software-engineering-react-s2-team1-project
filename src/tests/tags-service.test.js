@@ -111,6 +111,7 @@ describe("can retrieve all tags with REST API", () => {
     let tid1, testTuit1 = null;
     let tid2, testTuit2 = null;
     let tid3, testTuit3 = null;
+    let sonicID = null;
 
     // Set up tests
     beforeAll(async () => {
@@ -158,6 +159,7 @@ describe("can retrieve all tags with REST API", () => {
         promises.push(deleteTuitByTuitText(mockedTuit1.tuit));
         promises.push(deleteTuitByTuitText(mockedTuit2.tuit));
         promises.push(deleteTuitByTuitText(mockedTuit3.tuit));
+        promises.push(deleteTag(sonicID));
 
         // Wait for and return the result of all promises
         return Promise.all(promises);
@@ -172,10 +174,12 @@ describe("can retrieve all tags with REST API", () => {
 
         let sonicFlag = false;
         let hedgehogFlag = false;
+
         // Check theTags contains the 3 expected
         for (let i = 0; i < theTags.length; i++) {
             if (theTags[i].tag == 'Sonic') {
                 sonicFlag = true;
+                sonicID = theTags[i]._id;
                 expect(theTags[i].count).toBeGreaterThanOrEqual(2);
             } else if (theTags[i].tag == 'hedgehog') {
                 hedgehogFlag = true;
