@@ -8,6 +8,7 @@ import * as likeService from "../../services/likes-service";
 import * as dislikeService from "../../services/dislikes-service";
 import * as tuitService from '../../services/tuits-service';
 import * as authService from "../../services/auth-service";
+import * as followService from "../../services/follows-service";
 
 const Tuits = ({tuits = [], refreshTuits}) => {
     const [profile, setProfile] = useState(undefined);
@@ -58,7 +59,21 @@ const Tuits = ({tuits = [], refreshTuits}) => {
             .then(refreshTuits);
 
     /**
-     * Modify tuit using API
+     * Toggle follow of a tuit author using the API.
+     * @param tuit Tuit with author to be followed/unfollowed
+     */
+    const toggleFollow = (tuit) => {
+        if (profile !== undefined) {
+            followService.userTogglesFollow("me", tuit.postedBy)
+                .then(refreshTuits)
+                .catch(e => alert(e));
+        } else {
+            alert("Log in to follow users!")
+        }
+    }
+
+    /**
+     * Modify tuit using API.
      * @param tid Primary Key of tuit
      * @param newTuit New String for Tuit
      */
@@ -76,6 +91,7 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                     deleteTuit={deleteTuit}
                     toggleLikes={toggleLikes}
                     toggleDislikes={toggleDislikes}
+                    toggleFollow={toggleFollow}
                     updateTuit={updateTuit}
                     tuit={tuit}/>
             );
