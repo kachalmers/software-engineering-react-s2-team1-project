@@ -6,7 +6,7 @@ import Tuits from "../tuits"
 
 const TuitsByTag = () => {
     //Uses Parameters to search
-    const {tagSearch} = useParams();
+    let { tagSearch } = useParams();
     const navigate = useNavigate();
 
     const [tuits, setTuits] = useState([]);
@@ -40,7 +40,7 @@ const TuitsByTag = () => {
             });
         console.log("Tuits with " + tempTag + " added!");
         //console.log(tuits.length);
-        navigate(tempTag);
+        navigate(`/explore/tuitsbytag/${tempTag}`);
     }
 
     const findTuitsWithTag = () => {
@@ -57,6 +57,7 @@ const TuitsByTag = () => {
     useEffect(() => {
         //setTuits([]);// Show no tuits...
         findTuitsWithTag();
+
         console.log("Use Effect activated");
         //goToSearch();
         /*
