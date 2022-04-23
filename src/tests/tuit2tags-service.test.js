@@ -6,7 +6,7 @@ import {createUser, deleteUsersByUsername} from "../services/users-service";
 import {findTuitsWithTag} from "../services/tuit2tags-service";
 
 
-describe("can retrieve all tuit2tags with REST API", () => {
+describe("can retrieve all tuits with tags with REST API", () => {
     // Mocked tuits to insert
     const mockedTuit1 = {
         tuit: "Alrighty, we're in! #Tails"
@@ -41,9 +41,9 @@ describe("can retrieve all tuit2tags with REST API", () => {
         remove tuits with test texts to list of promises
         */
         promises.push(deleteUsersByUsername(tails.username));
-        promises.push(deleteTuitByTuitText(mockedTuit1.tuit));
-        promises.push(deleteTuitByTuitText(mockedTuit2.tuit));
-        promises.push(deleteTuitByTuitText(mockedTuit3.tuit));
+        promises.push(await deleteTuitByTuitText(mockedTuit1.tuit));
+        promises.push(await deleteTuitByTuitText(mockedTuit2.tuit));
+        promises.push(await deleteTuitByTuitText(mockedTuit3.tuit));
 
         await Promise.all(promises);    // Wait for all promises to be fulfilled
 
