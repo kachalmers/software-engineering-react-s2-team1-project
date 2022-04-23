@@ -116,9 +116,9 @@ describe("can retrieve all tags with REST API", () => {
         remove tuits with test texts to list of promises
         */
         promises.push(deleteUsersByUsername(sonic.username));
-        promises.push(deleteTuitByTuitText(mockedTuit1.tuit));
-        promises.push(deleteTuitByTuitText(mockedTuit2.tuit));
-        promises.push(deleteTuitByTuitText(mockedTuit3.tuit));
+        promises.push(await deleteTuitByTuitText(mockedTuit1.tuit));
+        promises.push(await deleteTuitByTuitText(mockedTuit2.tuit));
+        promises.push(await deleteTuitByTuitText(mockedTuit3.tuit));
 
         await Promise.all(promises);    // Wait for all promises to be fulfilled
 
