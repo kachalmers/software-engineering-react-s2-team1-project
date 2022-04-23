@@ -72,9 +72,9 @@ export const deleteTuit = (tid) =>
 
 /**
  * (For testing) Use API to remove tuits with given text.
- * @param {String} text Tuit text
+ * @param {string} tuitText Text of tuit(s) to be deleted
  * @returns {Promise<AxiosResponse<any>>} Status for tuit deletion
  */
-export const deleteTuitByTuitText = (text) =>
-    api.delete(`${TUITS_API}/text/${text}`)
+export const deleteTuitByTuitText = (tuitText) =>
+    api.delete(`${TUITS_API}`, {data: {tuit: tuitText}})
         .then(response => response.data)
