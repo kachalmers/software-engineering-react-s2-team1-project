@@ -16,7 +16,7 @@ export const api = axios.create({
 /**
  * Use API to retrieve tuits with a given tag
  * @param {string} tagString String of the tag
- * @returns {Promise <Tuits[]>} Tuits Array
+ * @returns {Promise<AxiosResponse<any>>} Tuits Array
  */
 export const findTuitsWithTag = (tagString) =>
     api.get(`${TAGS_API}/${tagString}/tuits`)
