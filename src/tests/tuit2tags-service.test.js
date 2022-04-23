@@ -5,7 +5,7 @@ import {createTuitByUser, deleteTuitByTuitText, findTuitById} from "../services/
 import {findAllTuitsDislikedByUser, userTogglesTuitDislikes} from "../services/dislikes-service";
 import {userTogglesTuitLikes} from "../services/likes-service";
 import {createUser, deleteUsersByUsername} from "../services/users-service";
-import {findTuitsWithTag} from "../services/tuit2tags-service";
+import {api, findTuitsWithTag} from "../services/tuit2tags-service";
 import {deleteTag} from "../services/tags-service";
 
 
@@ -37,6 +37,7 @@ describe("can retrieve all tuit2tags with REST API", () => {
 
     // Set up tests
     beforeAll(async () => {
+        console.log("Started beforeAll");
         let promises = [];  // Initialize an empty list of promises
 
         /*
@@ -61,11 +62,12 @@ describe("can retrieve all tuit2tags with REST API", () => {
         tid1 = testTuit1._id
         tid2 = testTuit2._id;
         tid3 = testTuit3._id
-
+        console.log("End of beforeAll");
     })
 
     // Clean up after tests
     afterAll(async () => {
+        console.log("Start of afterAll");
         // Retrieve testTuit1, 2, and 3 by their ids
         testTuit1 = await findTuitById(tid1);
         testTuit2 = await findTuitById(tid2);
@@ -84,19 +86,21 @@ describe("can retrieve all tuit2tags with REST API", () => {
 
         // Wait for and return the result of all promises
         return Promise.all(promises);
+        console.log("End of afterAll");
     })
 
     test("can retrieve all tuit2tags with REST API", async () => {
+        console.log("Start of test");
         // Find and store all tuits with tags
-        const taggedTuits = await findTuitsWithTag('SonicTheHedgehog');
-        const tailsTagTuit = await findTuitsWithTag('Tails');
+        const taggedTuits = await findTuitsWithTag({tag:'SonicTheHedgehog'});
+        const tailsTagTuit = await findTuitsWithTag({tag:'Tails'});
 
         // The number of tuits w/SonicTheHedgehog tag should be at least 2
         expect(taggedTuits.length).toBeGreaterThanOrEqual(2);
         // The number of tuits w/Tails tag should be at least 1
         expect(tailsTagTuit.length).toBeGreaterThanOrEqual(1);
 
-        const tailsTuitID = [tid1];    // store id of #Tails tuits
+        /*const tailsTuitID = [tid1];    // store id of #Tails tuits
         const sonicTuitsID = [tid2, tid3];   // store id of #SonicTheHedgehog tuits
 
         // For each sonic tagged tuit...
@@ -109,8 +113,8 @@ describe("can retrieve all tuit2tags with REST API", () => {
         tailsTagTuit.forEach((tuit) => {
             // Check for tuit id in list of tails tagged tuit ids
             expect(tailsTuitID.indexOf(tuit._id)).toBeGreaterThanOrEqual(0);
-        })
-
+        })*/
+        console.log("End of test");
     })
 })
 
