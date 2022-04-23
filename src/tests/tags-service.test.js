@@ -48,11 +48,6 @@ describe('user can create a tag in a tuit with REST API', () => {
 
     // Clean up after tests
     afterAll(async () => {
-        // If the tuit had tags...
-        // if (testTuit.stats.dislikes > 0) {
-        //     // Remove the tag using the deleteTag function
-        //     await deleteTag(tagID);
-        // }
 
         let promises = []   // Initialize an empty list of promises
 
@@ -111,7 +106,6 @@ describe("can retrieve all tags with REST API", () => {
     let tid1, testTuit1 = null;
     let tid2, testTuit2 = null;
     let tid3, testTuit3 = null;
-    let sonicID = null;
 
     // Set up tests
     beforeAll(async () => {
@@ -156,10 +150,9 @@ describe("can retrieve all tags with REST API", () => {
         remove tuits with test texts to list of promises
         */
         promises.push(deleteUsersByUsername(sonic.username));
-        promises.push(deleteTuitByTuitText(mockedTuit1.tuit));
-        promises.push(deleteTuitByTuitText(mockedTuit2.tuit));
-        promises.push(deleteTuitByTuitText(mockedTuit3.tuit));
-        promises.push(deleteTag(sonicID));
+        promises.push(await deleteTuitByTuitText(mockedTuit1.tuit));
+        promises.push(await deleteTuitByTuitText(mockedTuit2.tuit));
+        promises.push(await deleteTuitByTuitText(mockedTuit3.tuit));
 
         // Wait for and return the result of all promises
         return Promise.all(promises);
@@ -179,7 +172,6 @@ describe("can retrieve all tags with REST API", () => {
         for (let i = 0; i < theTags.length; i++) {
             if (theTags[i].tag == 'Sonic') {
                 sonicFlag = true;
-                sonicID = theTags[i]._id;
                 expect(theTags[i].count).toBeGreaterThanOrEqual(2);
             } else if (theTags[i].tag == 'hedgehog') {
                 hedgehogFlag = true;
