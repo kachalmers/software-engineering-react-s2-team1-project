@@ -48,7 +48,7 @@ const TuitsByTag = () => {
         // findAllTuits in next line to be changed to findTuitsWithTag({tag})
         setTempTag(tagString);
         console.log("Page Opened: This is the Param: -->" + tagString + "<--")
-        if(tagString === '') {
+        if(tagString === undefined) {
             service.findAllTuits()
                 .then(tuits => {
                     setTuits(tuits);
@@ -95,6 +95,7 @@ const TuitsByTag = () => {
     // printing here to show value of tag
     // https://jsramblings.com/are-you-logging-the-state-immediately-after-updating-it-heres-why-that-doesnt-work/
     console.log(JSON.parse(JSON.stringify("before return: "+tagString)));
+    //setTempTag(tagString);
     return (
         <div className="ttr-whats-happening p-0">
             <div className="ttr-search position-relative">
