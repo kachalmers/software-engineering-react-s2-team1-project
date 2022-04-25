@@ -10,7 +10,7 @@ const TuitsByTag = () => {
     const navigate = useNavigate();
 
     const [tuits, setTuits] = useState([]);
-    const [sortOrder, setOrder] = useState('');
+    //const [sortOrder, setOrder] = useState('');
     const [tempTag, setTempTag] = useState('');
     const [tag, setTag] = useState('');
 
@@ -32,19 +32,19 @@ const TuitsByTag = () => {
 
 
     const goToSearch = () => {
-        console.log(tempTag + ". This is the tempTag");
-        console.log(tagSearch + ". This is the TagSearch");
+        //console.log(tempTag + ". This is the tempTag");
+        //console.log(tagSearch + ". This is the TagSearch");
         const tuitArray = tagService.findTuitsWithTag(tagSearch);
-        console.log(tuitArray);
+        //console.log(tuitArray);
         tagService.findTuitsWithTag(tempTag)
             .then(newTuits => {
                 setTuits(newTuits);
             });
-        console.log("Tuits with " + tempTag + " added!");
+        //console.log("Tuits with " + tempTag + " added!");
         //console.log(tuits.length);
         navigate(tempTag);
     }
-
+    /*
     const handleSort = (event) => {
         let newOrder = event.target.value;
         console.log(newOrder);
@@ -52,6 +52,7 @@ const TuitsByTag = () => {
         //sortTuits();
         //findTuitsWithTag();
     }
+     */
 
 
     const findTuitsWithTag = () => {
@@ -68,6 +69,7 @@ const TuitsByTag = () => {
     useEffect(() => {
         //setTuits([]);// Show no tuits...
         findTuitsWithTag();
+        /*
         console.log("Use Effect activated");
         if(sortOrder === 'LIKES'){
             const tuitOrder = tuits.sort((a, b) => a.stats.likes - b.stats.likes);
@@ -75,11 +77,10 @@ const TuitsByTag = () => {
             console.log("likes order");
         }
         //goToSearch();
-        /*
         Note: this can later be changed to show all tuits with any tag.
         This can later be discussed by the team how we want to present this
          */
-    }, [sortOrder]);
+    }, []);
 
 
     // Whenever a keyboard button is clicked...
@@ -122,8 +123,7 @@ const TuitsByTag = () => {
                 <div className="mt-2 position-relative">
                     <select name="selectSort"
                             defaultValue="RECENT"
-                            id = "selectSort"
-                            onChange = {handleSort}>
+                            id = "selectSort">
                         <option value="LIKES">Sort By: Most Likes</option>
                         <option value="RECENT">Sort By: Most Recent</option>
                     </select>
