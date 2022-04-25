@@ -15,6 +15,13 @@ const TuitScreen = () => {
     return(
         <div>
 
+            <h4>Old Tuit:</h4>
+            <a>{tuit.tuit}</a>
+
+            <br/>
+            <br/>
+
+            <h4>New Tuit:</h4>
             <input className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
                    placeholder = {tuit.tuit}
                 value = {newTuitString}

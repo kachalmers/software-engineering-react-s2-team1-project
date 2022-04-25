@@ -111,6 +111,8 @@ const TuitsByTag = () => {
                         <option value="RECENT">Sort By: Most Recent</option>
                     </select>
 
+                    <a>    Tuits Displayed: {tuits.length}</a>
+
                     <button onClick={() =>
                         //add into param of findTuitsWithTag
                         {goToSearch()}
