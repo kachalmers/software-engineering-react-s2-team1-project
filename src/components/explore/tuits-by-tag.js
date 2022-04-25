@@ -6,11 +6,11 @@ import Tuits from "../tuits"
 
 const TuitsByTag = () => {
     //Uses Parameters to search
-    let { tagSearch } = useParams();
+    let { tagString } = useParams();
     const navigate = useNavigate();
 
     const [tuits, setTuits] = useState([]);
-    const [tempTag, setTempTag] = useState('');
+    const [tempTag, setTempTag] = useState(tagString);
     const [tag, setTag] = useState('');
 
     // Currently sets tuits to be shown back to an empty list of tuits
@@ -31,8 +31,8 @@ const TuitsByTag = () => {
 
     const goToSearch = () => {
         console.log(tempTag + ". This is the tempTag");
-        console.log(tagSearch + ". This is the TagSearch");
-        const tuitArray = tagService.findTuitsWithTag(tagSearch);
+        console.log(tagString + ". This is the TagSearch");
+        const tuitArray = tagService.findTuitsWithTag(tagString);
         console.log(tuitArray);
         tagService.findTuitsWithTag(tempTag)
             .then(newTuits => {
@@ -46,18 +46,24 @@ const TuitsByTag = () => {
     const findTuitsWithTag = () => {
         // #KAC
         // findAllTuits in next line to be changed to findTuitsWithTag({tag})
-        console.log("Page Opened: This is the Param: -->" + tagSearch + "<--")
-        service.findAllTuits()
+        setTempTag(tagString);
+        console.log("Page Opened: This is the Param: -->" + tagString + "<--")
+        if(tagString === undefined) {
+            service.findAllTuits()
                 .then(tuits => {
                     setTuits(tuits);
                 })
+        }else{
+            tagService.findTuitsWithTag(tagString).then(newTuits => {
+                setTuits(newTuits);
+            });
+        }
     };
 
     // When we first load the page...
     useEffect(() => {
         //setTuits([]);// Show no tuits...
         findTuitsWithTag();
-
         console.log("Use Effect activated");
         //goToSearch();
         /*
@@ -88,7 +94,8 @@ const TuitsByTag = () => {
     // Log won't pick up on updates to states of objects until right before the return...
     // printing here to show value of tag
     // https://jsramblings.com/are-you-logging-the-state-immediately-after-updating-it-heres-why-that-doesnt-work/
-    console.log(JSON.parse(JSON.stringify("before return: "+tag)));
+    console.log(JSON.parse(JSON.stringify("before return: "+tagString)));
+    //setTempTag(tagString);
     return (
         <div className="ttr-whats-happening p-0">
             <div className="ttr-search position-relative">
