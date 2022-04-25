@@ -62,23 +62,13 @@ const TuitsByTag = () => {
                 .then(tuits => {
                     setTuits(tuits);
                 })
-
+        //tuits.reverse();
     };
 
     // When we first load the page...
     useEffect(() => {
         //setTuits([]);// Show no tuits...
         findTuitsWithTag();
-        const sortTuits = () => {
-            let sortProperty = tuits.postedOn;
-            if(sortOrder === 'LIKES') {
-                sortProperty = tuits.likes;
-            }
-            const newOrder = [...tuits].sort(sortProperty);
-            console.log("sorted!");
-            setTuits(newOrder);
-        };
-        sortTuits();
         console.log("Use Effect activated");
         //goToSearch();
         /*
@@ -146,7 +136,7 @@ const TuitsByTag = () => {
                 </div>
             </div>
             <br/>
-            <Tuits tuits={tuits.sort(tuits.stats)} refreshTuits={findTuitsWithTag}/>
+            <Tuits tuits={tuits} refreshTuits={findTuitsWithTag}/>
         </div>
     )
 }
