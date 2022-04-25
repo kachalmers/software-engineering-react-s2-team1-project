@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import {
   createUser,
@@ -10,7 +11,9 @@ import {HashRouter} from "react-router-dom";
 import Tuiter from "../components/tuiter";
 import React from "react";
 
+/*
 jest.mock("axios");
+
 
 const MOCKED_USERS = [
   {username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com'},
@@ -276,4 +279,7 @@ describe('findAllUsers',  () => {
       expect(user.email).toEqual(`${username}@stooges.com`);
     });
   });
+
 });
+*/
+
