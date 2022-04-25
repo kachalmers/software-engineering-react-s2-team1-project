@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import * as service from "../../services/tuits-service";
 import * as tagService from "../../services/tuit2tags-service";
-import Tuits from "../tuits"
+import Tuits from "../tuits";
 
 const TuitsByTag = () => {
     //Uses Parameters to search
@@ -10,7 +10,7 @@ const TuitsByTag = () => {
     const navigate = useNavigate();
 
     const [tuits, setTuits] = useState([]);
-    const [sortOrder, setOrder] = useState('RECENT');
+    const [sortOrder, setOrder] = useState('');
     const [tempTag, setTempTag] = useState('');
     const [tag, setTag] = useState('');
 
@@ -62,7 +62,6 @@ const TuitsByTag = () => {
                 .then(tuits => {
                     setTuits(tuits);
                 })
-        //tuits.reverse();
     };
 
     // When we first load the page...
@@ -70,6 +69,11 @@ const TuitsByTag = () => {
         //setTuits([]);// Show no tuits...
         findTuitsWithTag();
         console.log("Use Effect activated");
+        if(sortOrder === 'LIKES'){
+            const tuitOrder = tuits.sort((a, b) => a.stats.likes - b.stats.likes);
+            setTuits(tuitOrder);
+            console.log("likes order");
+        }
         //goToSearch();
         /*
         Note: this can later be changed to show all tuits with any tag.
