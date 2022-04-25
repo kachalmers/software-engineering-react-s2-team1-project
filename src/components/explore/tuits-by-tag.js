@@ -10,6 +10,7 @@ const TuitsByTag = () => {
     const navigate = useNavigate();
 
     const [tuits, setTuits] = useState([]);
+    const [sortOrder, setOrder] = useState('RECENT');
     const [tempTag, setTempTag] = useState('');
     const [tag, setTag] = useState('');
 
@@ -29,6 +30,7 @@ const TuitsByTag = () => {
     };
 
 
+
     const goToSearch = () => {
         console.log(tempTag + ". This is the tempTag");
         console.log(tagSearch + ". This is the TagSearch");
@@ -43,6 +45,15 @@ const TuitsByTag = () => {
         navigate(tempTag);
     }
 
+    const handleSort = (event) => {
+        let newOrder = event.target.value;
+        console.log(newOrder);
+        setOrder(newOrder);
+        //sortTuits();
+        //findTuitsWithTag();
+    }
+
+
     const findTuitsWithTag = () => {
         // #KAC
         // findAllTuits in next line to be changed to findTuitsWithTag({tag})
@@ -51,19 +62,30 @@ const TuitsByTag = () => {
                 .then(tuits => {
                     setTuits(tuits);
                 })
+
     };
 
     // When we first load the page...
     useEffect(() => {
         //setTuits([]);// Show no tuits...
         findTuitsWithTag();
+        const sortTuits = () => {
+            let sortProperty = tuits.postedOn;
+            if(sortOrder === 'LIKES') {
+                sortProperty = tuits.likes;
+            }
+            const newOrder = [...tuits].sort(sortProperty);
+            console.log("sorted!");
+            setTuits(newOrder);
+        };
+        sortTuits();
         console.log("Use Effect activated");
         //goToSearch();
         /*
         Note: this can later be changed to show all tuits with any tag.
         This can later be discussed by the team how we want to present this
          */
-    }, []);
+    }, [sortOrder]);
 
 
     // Whenever a keyboard button is clicked...
@@ -106,7 +128,8 @@ const TuitsByTag = () => {
                 <div className="mt-2 position-relative">
                     <select name="selectSort"
                             defaultValue="RECENT"
-                            id = "selectSort">
+                            id = "selectSort"
+                            onChange = {handleSort}>
                         <option value="LIKES">Sort By: Most Likes</option>
                         <option value="RECENT">Sort By: Most Recent</option>
                     </select>
@@ -123,7 +146,7 @@ const TuitsByTag = () => {
                 </div>
             </div>
             <br/>
-            <Tuits tuits={tuits} refreshTuits={findTuitsWithTag}/>
+            <Tuits tuits={tuits.sort(tuits.stats)} refreshTuits={findTuitsWithTag}/>
         </div>
     )
 }
