@@ -2,13 +2,17 @@
  * @file Implement Tag component for displaying each tag
  */
 import React from "react";
+import {useNavigate} from "react-router-dom";
+
 
 const Tag = ({tag}) => {
+
+    const navigate = useNavigate();
 
     return (
         <div className="row">
             <div className="col-6">
-                <a href="#/explore/tuitsbytag"
+                <a onClick = {()=> navigate(`/explore/tuitsbytag/${tag.tag}`)}
                    className={`btn btn-primary rounded-pill fa-pull-right
                                   fw-bold ps-4 pe-4`}>
                     {tag.tag}
