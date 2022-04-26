@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import * as service from "../../services/tuits-service";
 import * as tagService from "../../services/tuit2tags-service";
-import Tuits from "../tuits"
+import Tuits from "../tuits";
 
 const TuitsByTag = () => {
     //Uses Parameters to search
@@ -10,7 +10,9 @@ const TuitsByTag = () => {
     const navigate = useNavigate();
 
     const [tuits, setTuits] = useState([]);
-    const [tempTag, setTempTag] = useState(tagString);
+
+    //const [sortOrder, setOrder] = useState('');
+    const [tempTag, setTempTag] = useState('');
     const [tag, setTag] = useState('');
 
     // Currently sets tuits to be shown back to an empty list of tuits
@@ -29,19 +31,30 @@ const TuitsByTag = () => {
     };
 
 
+
     const goToSearch = () => {
-        console.log(tempTag + ". This is the tempTag");
-        console.log(tagString + ". This is the TagSearch");
+        //console.log(tempTag + ". This is the tempTag");
+        //console.log(tagSearch + ". This is the TagSearch");
         const tuitArray = tagService.findTuitsWithTag(tagString);
-        console.log(tuitArray);
+        //console.log(tuitArray);
         tagService.findTuitsWithTag(tempTag)
             .then(newTuits => {
                 setTuits(newTuits);
             });
-        console.log("Tuits with " + tempTag + " added!");
+        //console.log("Tuits with " + tempTag + " added!");
         //console.log(tuits.length);
         navigate(`/explore/tuitsbytag/${tempTag}`);
     }
+    /*
+    const handleSort = (event) => {
+        let newOrder = event.target.value;
+        console.log(newOrder);
+        setOrder(newOrder);
+        //sortTuits();
+        //findTuitsWithTag();
+    }
+     */
+
 
     const findTuitsWithTag = () => {
         // #KAC
@@ -64,9 +77,14 @@ const TuitsByTag = () => {
     useEffect(() => {
         //setTuits([]);// Show no tuits...
         findTuitsWithTag();
-        console.log("Use Effect activated");
-        //goToSearch();
         /*
+        console.log("Use Effect activated");
+        if(sortOrder === 'LIKES'){
+            const tuitOrder = tuits.sort((a, b) => a.stats.likes - b.stats.likes);
+            setTuits(tuitOrder);
+            console.log("likes order");
+        }
+        //goToSearch();
         Note: this can later be changed to show all tuits with any tag.
         This can later be discussed by the team how we want to present this
          */
@@ -118,6 +136,8 @@ const TuitsByTag = () => {
                         <option value="LIKES">Sort By: Most Likes</option>
                         <option value="RECENT">Sort By: Most Recent</option>
                     </select>
+
+                    <a>    Tuits Displayed: {tuits.length}</a>
 
                     <button onClick={() =>
                         //add into param of findTuitsWithTag
