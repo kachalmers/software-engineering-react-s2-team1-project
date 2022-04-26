@@ -1,8 +1,6 @@
 import {useEffect, useState} from "react";
 import * as service from "../../services/tuits-service"
-import {Link, useParams} from "react-router-dom";
-import {useNavigate} from "../../services/tuits-service";
-import Tuit from "./tuit";
+import {Link, useParams, useNavigate} from "react-router-dom";
 import {updateTuit} from "../../services/tuits-service";
 
 const TuitScreen = () => {

@@ -35,7 +35,7 @@ const TuitsByTag = () => {
     const goToSearch = () => {
         //console.log(tempTag + ". This is the tempTag");
         //console.log(tagSearch + ". This is the TagSearch");
-        const tuitArray = tagService.findTuitsWithTag(tagSearch);
+        const tuitArray = tagService.findTuitsWithTag(tagString);
         //console.log(tuitArray);
         tagService.findTuitsWithTag(tempTag)
             .then(newTuits => {
