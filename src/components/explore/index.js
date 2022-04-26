@@ -1,13 +1,12 @@
 /**
  * @file Implements Profile component for displaying user explore page
  */
-import React, {useEffect, useState} from "react";
+import React from "react";
 import AllTuits from "./all-tuits"; // import MyTuits to render in explore screen
-import {Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {Link, Route, Routes, useLocation} from "react-router-dom";
 import MyLikes from "./my-likes";
 import TuitsByTag from "./tuits-by-tag";
 import AllTags from "./all-tags";
-import SearchATag from "./search-list-item";
 
 const Explore = () => {
   const location = useLocation();

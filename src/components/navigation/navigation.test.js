@@ -40,29 +40,6 @@ describe('test links', () => {
                 .indexOf('fw-bold') >= 0).toBe(true);
         });
     })
-    // const a = document.querySelector("a")
-    // fireEvent.click(a);
-
-    // const lis = document.querySelectorAll("li")
-    // screen.findByTitle
-    // console.log(element);
-    // lis.forEach(li => {
-    //     fireEvent.click(li)
-    //    
-    //     // click(li).then(result => console.log(result))
-    //     console.log(li.className)
-    // })
-    // const liElements = container.querySelectorAll("li")
-    // liElements.forEach((liElement, ndx) => {
-    //     fireEvent.click(liElement,new MouseEvent('click', {
-    //         bubbles: true,
-    //         cancelable: true,
-    //     }),);
-    //     // liElement.click();
-    //     test(`test link ${ndx}`, () => {
-    //         expect(container.firstChild.classList.contains('fw-bold')).toBe(true)
-    //     });
-    // })
 })
 
 test('Navigation has Tuiter', () => {

@@ -2,8 +2,7 @@
  * @file Implements tests for tags API
  */
 import {createTuitByUser, deleteTuitByTuitText, findTuitById} from "../services/tuits-service";
-import {api, findAllTags, deleteTag} from "../services/tags-service";
-import {findTuitsWithTag} from "../services/tuit2tags-service";
+import {findAllTags, deleteTag} from "../services/tags-service";
 import {createUser, deleteUsersByUsername} from "../services/users-service";
 
 describe('user can create a tag in a tuit with REST API', () => {
@@ -27,23 +26,22 @@ describe('user can create a tag in a tuit with REST API', () => {
     // Set up tests
     beforeAll(async () => {
         let promises = [];  // Initialize an empty list of promises
-        console.log("Before user delete");
+
         // Add promise to remove users with test username to list of promises
         promises.push(deleteUsersByUsername(sonic.username));
-        console.log("Before tuit delete");
+
         // Add promise to remove tuits with test text to list of promises
         promises.push(deleteTuitByTuitText(mockedTuit.tuit));
 
         await Promise.all(promises);    // Wait for all promises to be fulfilled
-        console.log("Before user creation");
+
         // Create a new user with mocked user and store their id
         const author = await createUser(sonic);
         uid = author._id;
-        console.log("Created the user");
+
         // Create a new tuit by user with mocked tuit/user and store its id
         testTuit = await createTuitByUser(author._id, mockedTuit);
         tid = testTuit._id;
-        console.log("Created the tuit by user");
     })
 
     // Clean up after tests
@@ -130,9 +128,9 @@ describe("can retrieve all tags with REST API", () => {
         testTuit1 = await createTuitByUser(uid, mockedTuit1);
         testTuit2 = await createTuitByUser(uid, mockedTuit2);
         testTuit3 = await createTuitByUser(uid, mockedTuit3);
-        tid1 = testTuit1._id
+        tid1 = testTuit1._id;
         tid2 = testTuit2._id;
-        tid3 = testTuit3._id
+        tid3 = testTuit3._id;
 
     })
 

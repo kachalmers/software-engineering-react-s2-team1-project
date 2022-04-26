@@ -15,7 +15,6 @@ const MyLikes = () => {
     const findTuitsILike = () => {
         service.findAllTuitsLikedByUser("me")
             .then((tuits) => {
-                console.log(tuits);
                 setLikedTuits(tuits)
             })
     }
