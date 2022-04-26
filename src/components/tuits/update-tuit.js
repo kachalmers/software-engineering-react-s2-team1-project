@@ -1,10 +1,12 @@
 import {useEffect, useState} from "react";
 import * as service from "../../services/tuits-service"
 import {Link, useParams} from "react-router-dom";
+import {useNavigate} from "../../services/tuits-service";
 import Tuit from "./tuit";
 import {updateTuit} from "../../services/tuits-service";
 
 const TuitScreen = () => {
+    const navigate = useNavigate();
     const [tuit, setTuit] = useState({});
     const [newTuitString, setNewTuitString] = useState('');
     const {tid} = useParams();
@@ -28,9 +30,13 @@ const TuitScreen = () => {
                    onChange={(event) =>
                        setNewTuitString(event.target.value)}/>
 
-            <button onClick = {()=>updateTuit(tid, {...tuit, tuit: newTuitString})}
-                className = "float-end tuit-button me-1">
-                Update
+            <button onClick ={() => {
+                        updateTuit(tid, {...tuit, tuit: newTuitString});
+                        navigate(-1);
+                        alert('Your tuit was updated!');
+                    }}
+                    className = "float-end tuit-button me-1">
+                    Update
             </button>
             <Link to={`/home`}>
                 <button className="float-end tuit-button me-1"> Cancel </button>
