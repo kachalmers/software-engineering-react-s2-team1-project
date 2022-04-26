@@ -25,7 +25,6 @@ const SearchedTag = () => {
 
     useEffect(() => {
         findTuitsWithTag()
-        console.log(tagSearch + "<- Searched tag")
     }, []);
 
     return (
