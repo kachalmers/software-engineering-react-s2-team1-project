@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import * as service from "../../services/tuit2tags-service";
 import Tuits from "../tuits"
 
@@ -10,13 +10,6 @@ const SearchedTag = () => {
     const navigate = useNavigate();
 
     const findTuitsWithTag = () => {
-        // #KAC-findTuitsWithTag
-        /*
-        service.findAllTuits()
-            .then(tuits => {
-                setTuits(tuits);
-            })
-         */
         service.findTuitsWithTag(tagSearch)
             .then(tuits => {
                 setTuits(tuits);
