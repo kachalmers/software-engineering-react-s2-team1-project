@@ -6,10 +6,11 @@ import Tuits from "../tuits";
 
 const TuitsByTag = () => {
     //Uses Parameters to search
-    const {tagSearch} = useParams();
+    let { tagString } = useParams();
     const navigate = useNavigate();
 
     const [tuits, setTuits] = useState([]);
+
     //const [sortOrder, setOrder] = useState('');
     const [tempTag, setTempTag] = useState('');
     const [tag, setTag] = useState('');
@@ -42,7 +43,7 @@ const TuitsByTag = () => {
             });
         //console.log("Tuits with " + tempTag + " added!");
         //console.log(tuits.length);
-        navigate(tempTag);
+        navigate(`/explore/tuitsbytag/${tempTag}`);
     }
     /*
     const handleSort = (event) => {
@@ -58,11 +59,18 @@ const TuitsByTag = () => {
     const findTuitsWithTag = () => {
         // #KAC
         // findAllTuits in next line to be changed to findTuitsWithTag({tag})
-        console.log("Page Opened: This is the Param: -->" + tagSearch + "<--")
-        service.findAllTuits()
+        setTempTag(tagString);
+        console.log("Page Opened: This is the Param: -->" + tagString + "<--")
+        if(tagString === undefined) {
+            service.findAllTuits()
                 .then(tuits => {
                     setTuits(tuits);
                 })
+        }else{
+            tagService.findTuitsWithTag(tagString).then(newTuits => {
+                setTuits(newTuits);
+            });
+        }
     };
 
     // When we first load the page...
@@ -104,7 +112,8 @@ const TuitsByTag = () => {
     // Log won't pick up on updates to states of objects until right before the return...
     // printing here to show value of tag
     // https://jsramblings.com/are-you-logging-the-state-immediately-after-updating-it-heres-why-that-doesnt-work/
-    console.log(JSON.parse(JSON.stringify("before return: "+tag)));
+    console.log(JSON.parse(JSON.stringify("before return: "+tagString)));
+    //setTempTag(tagString);
     return (
         <div className="ttr-whats-happening p-0">
             <div className="ttr-search position-relative">
